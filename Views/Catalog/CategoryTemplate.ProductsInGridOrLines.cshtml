@@ -1,0 +1,49 @@
+﻿@* Due to share database and development purposes, copied from sav template*@
+
+@model CategoryModel
+@using Nop.Core.Domain.Common;
+@using Nop.Core.Domain.Seo;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Models.Catalog;
+@using Nop.Web.Extensions;
+@{
+
+
+    Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+
+    var canonicalUrlsEnabled = EngineContext.Current.Resolve<SeoSettings>().CanonicalUrlsEnabled;
+    if (canonicalUrlsEnabled)
+    {
+        var categoryUrl = Url.RouteUrl("Category", new { SeName = Model.SeName }, this.Request.Url.Scheme);
+        Html.AddCanonicalUrlParts(categoryUrl);
+    }
+
+}
+
+<div class="row m-0 p-0 d-none d-md-block" style="background-color: black; position: relative; height: 500px;">
+  <img class="d-block w-100" src="~/Themes/v1/Content/images/header.jpg" style="opacity: 0.6;"> 
+  <div class="text-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, 50%);">
+    <h1 style="color: white; font-style: italic;">@Model.Name</h1>
+  </div>
+</div>
+
+<div class="row m-0 p-0 d-block d-md-none" style="background-color: black; position: relative;">
+  <img class="d-block w-100" src="~/Themes/v1/Content/images/header.jpg" style="opacity: 0.6;"> 
+  <div class="text-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, 50%);">
+    <h1 style="color: white; font-style: italic;">@Model.Name</h1>
+  </div>
+</div>
+
+@if (Model.Products.Count > 0)
+{
+  <div class="row" style="padding: 10% 10% 0; position: relative; background-color: white;">
+    @foreach (var product in Model.Products)
+    {
+      <div class="col-6 col-md-4 col-sm-4">
+        @Html.Partial("_ProductBox", product)
+      </div>
+    }
+  </div>
+}

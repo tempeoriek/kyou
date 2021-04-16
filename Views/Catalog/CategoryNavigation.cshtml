@@ -1,0 +1,409 @@
+﻿@model CategoryNavigationModel
+@using Nop.Web.Models.Catalog;
+
+
+@*<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>*@
+@*<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>*@
+@{
+  string absolutepath = HttpContext.Current.Request.Url.AbsolutePath;
+}
+
+@functions{
+  public bool BreadCrumbContainsCurrentCategoryId(CategorySimpleModel category)
+  {
+    if (Model.CurrentCategoryId == 0)
+      return false;
+
+    if (category.Id == Model.CurrentCategoryId)
+      return true;
+
+    foreach (var subCategory in category.SubCategories)
+    {
+      if (BreadCrumbContainsCurrentCategoryId(subCategory))
+      {
+        return true;
+      }
+    }
+
+    return false;
+  }
+}
+
+@helper RenderCategoryLineSidebar(CategorySimpleModel category)
+{
+  bool active = category.Id == Model.CurrentCategoryId || category.SubCategories.Count(BreadCrumbContainsCurrentCategoryId) > 0;
+  bool last = category.Id == Model.CurrentCategoryId;
+  string liClass = active ? "active" : "inactive";
+
+  if (last)
+  {
+    liClass += " last";
+  }
+
+  <li class="listItemB"><a href="@Url.RouteUrl("Category", new { SeName = category.SeName })" class="@liClass"> <img alt="icon" src="~/Content/Images/dot menu.png"> @category.Name</a></li>
+
+  if (category.Id == Model.CurrentCategoryId ||
+    category.SubCategories.Count(BreadCrumbContainsCurrentCategoryId) > 0)
+  {
+    if (category.SubCategories.Count > 0)
+    {
+      <ul class="sublist">
+        @foreach (var subCategory in category.SubCategories)
+        {
+          @RenderCategoryLine(subCategory)
+        }
+      </ul>
+    }
+  }
+}
+
+
+@*untuk yang category shop*@
+@helper RenderCategoryLine(CategorySimpleModel category)
+{
+  bool active = category.Id == Model.CurrentCategoryId || category.SubCategories.Count(BreadCrumbContainsCurrentCategoryId) > 0;
+  bool last = category.Id == Model.CurrentCategoryId;
+  string liClass = active ? "active" : "inactive";
+
+  if (last)
+  {
+    liClass += " last";
+  }
+
+  <a href="@Url.RouteUrl("Category", new { SeName = category.SeName })" class="@liClass dropdown-item"> @category.Name</a>
+}
+
+@*untuk yang category collection*@
+@helper RenderCategoryLineCollection(CategorySimpleModel category)
+{
+  bool active = category.Id == Model.CurrentCategoryId || category.SubCategories.Count(BreadCrumbContainsCurrentCategoryId) > 0;
+  bool last = category.Id == Model.CurrentCategoryId;
+  string liClass = active ? "active" : "inactive";
+
+  if (last)
+  {
+    liClass += " last";
+  }
+
+  <a href="@Url.RouteUrl("Category", new { SeName = category.SeName })" class="@liClass dropdown-item"> @category.Name</a>
+}
+
+
+@helper RenderCategoryMobile(CategorySimpleModel category)
+{
+  bool active = category.Id == Model.CurrentCategoryId || category.SubCategories.Count(BreadCrumbContainsCurrentCategoryId) > 0;
+  bool last = category.Id == Model.CurrentCategoryId;
+  string liClass = active ? "active" : "inactive";
+
+  if (last)
+  {
+    liClass += " last";
+  }
+  <li><a href="@Url.RouteUrl("Category", new { SeName = category.SeName })">@category.Name</a></li>
+
+}
+
+@helper RenderCategoryMobileCollection(CategorySimpleModel category)
+{
+  bool active = category.Id == Model.CurrentCategoryId || category.SubCategories.Count(BreadCrumbContainsCurrentCategoryId) > 0;
+  bool last = category.Id == Model.CurrentCategoryId;
+  string liClass = active ? "active" : "inactive";
+
+  if (last)
+  {
+    liClass += " last";
+  }
+  <li><a href="@Url.RouteUrl("Category", new { SeName = category.SeName })">@category.Name</a></li>
+}
+
+@helper RenderCategoryLine1(CategorySimpleModel category)
+{
+
+
+  if (category.SeName.Equals("shop-collection", StringComparison.OrdinalIgnoreCase))
+  {
+    <li class="list-group-item">
+        <a href="@Url.RouteUrl("Category", new { SeName = "spring-2015" })" class="@if (category.Id == Model.CurrentCategoryId) {<text>active</text>} else {<text>inactive</text>}">@category.Name</a>
+    </li>
+  }
+  else if (category.SeName.Contains("sale"))
+  {
+
+    <li class="list-group-item">
+      <a href="@Url.RouteUrl("Category", new { SeName = category.SeName })" class="@if (category.Id == Model.CurrentCategoryId) { <text> active</text>} else {<text>inactive</text>} sale-item">@category.Name</a>
+    </li>
+  }
+  else
+  {
+    <li>
+      @if (category.SubCategories.Any())
+      {
+        <div class="header-categories">
+          <a class="menu-shop child-categories collapsed" data-toggle="collapse" href="#collapse-@category.SeName" role="button" aria-expanded="false" style="color: white; font-size: 16px;" aria-controls="collapse-@category.SeName">@category.Name.ToUpper()</a>
+        </div>
+        <div class="collapse c-@category.SeName" id="collapse-@category.SeName" style="margin-bottom: 5px; margin-left: 15px;">
+          <ul class="list-unstyled sub-cat">
+            @foreach (var subCategory in category.SubCategories)
+            {
+                string cssActive = "";
+
+                <li class="subcat"><a style="color: white; font-size: 14px; font-weight: 600; font-style: italic;" href="@Url.RouteUrl("Category", new { SeName = subCategory.SeName })">@subCategory.Name</a></li>
+            }
+          </ul>
+        </div>
+      }
+      else
+      {
+        <a href="@Url.RouteUrl("Category", new { SeName = category.SeName })" style="color: white; font-size: 16px;" class="@if (category.Id == Model.CurrentCategoryId) {<text>active</text>} else {<text>inactive</text>}">@category.Name.ToUpper()</a>
+      }
+    </li>
+    
+  }
+}
+
+@{
+  var liCollapse = (Model.CurrentCategoryId > 0) ? "" : "collapse";
+  var parentId = (ViewBag.isMobile != null) ? "phmenu-mobile" : "phmenu";
+  var divId = (ViewBag.isMobile != null) ? "shop-mobile" : "shop";
+}
+
+
+
+
+@*desktop - mousover type*@
+<div id="accordionCategory" class="position-absolute" style="width: 100%; z-index: -1;">
+  <div class="row" style="height: 70px;">
+    <div class="col-12 col-md-4 col-sm-4 d-flex justify-content-center align-items-center">
+      @{
+        var issidebar = (ViewBag.isSidebar == null) ? false : Convert.ToBoolean(ViewBag.isSidebar);
+
+        if (!issidebar)
+        {
+          if (Model.Categories.Count > 0)
+          {
+            var index = 0;
+            foreach (var category in Model.Categories)
+            {
+              if (category.SubCategories.Any())
+              {
+                if (index == 0) {
+                  <a id="headingCategory-@category.Id" class="category-item" style="@if (absolutepath.Equals("/")) {<text>color: white !important;</text>} else {<text>color: gray;</text>}" role="button" @* href="/@category.SeName" *@>
+                    @category.Name.ToUpper()
+                  </a>
+                  <a class="category-item" href="/about" style="@if (absolutepath.Equals("/")) {<text>color: white !important;</text>} else {<text>color: gray;</text>}">
+                    ABOUT US
+                  </a>
+                }
+              }
+              else
+              {
+                <a id="headingCategory-@category.Id" class="category-item" href="@Url.RouteUrl("Category", new { SeName = category.SeName })">
+                  @category.Name.ToUpper()
+                </a>
+              }
+
+              index++;
+            }
+          }
+        } 
+        else
+        {
+          <div></div>
+        }
+      }
+    </div>
+  </div>
+
+  @* dropdown sub category full width *@
+  @{
+    foreach (var category in Model.Categories) {
+      if (category.SubCategories.Any()) {
+        <div style="background-image: url('./Themes/v1/Content/images/home.png'); background-size: cover; width: 102%; position: absolute; z-index: -1; top: 0; right: 0; left: 0; box-shadow: 0 8px 6px -6px lightgray; height: 900px;" class="row content-hover" id="dropdownMenuLink-@category.Id">
+          <div class="col-1 col-md-1 col-sm-1"></div>
+          <div class="col-4 col-md-4 col-sm-4 d-flex justify-content-left" style="padding-top: 18%;">
+            <div style="width: 100%;">
+              <div class="list-group">
+                <ul class="list-unstyled">
+                  <li>
+                    <a style="color: white; font-size: 16px;" href="/new-arrival">NEW ARRIVAL</a>
+                  </li>
+
+                  @foreach (var categories in Model.Categories)
+                  {
+                    @RenderCategoryLine1(categories)
+                  }
+
+                  @*Content*@
+                  <li>
+                    <a style="color: white; font-size: 16px;" href="/best-seller">BEST SELLER</a>
+                  </li>
+
+                  <li>
+                    <a style="color: white; font-size: 16px;" href="/sale">SALE</a>
+                  </li>
+
+                </ul>
+            </div>
+            </div>
+          </div>
+        </div>
+      }
+    }
+  }
+</div>
+
+
+
+@helper RenderSubCategory(int id, string cssActive, CategorySimpleModel item)
+{
+
+  <div class="tab-pane @cssActive" id="tab-@id">
+    <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="pills-a">
+      <div class="row" style="z-index:-1">
+        <div class="col-6 order-12  subitem-link" style=""></div>
+        <div class="col-6  order-1 img-subcat" style=""><img src="@item.PictureModel.ImageUrl" style="border:7px solid #99282C;width:250px;height:250px;box-sizing:border-box;" class="img-fluid" /><div class=""></div></div>
+      </div>
+      @*<div class="col-6 justify-content-end img-subcat" style="position:fixed;top:140px;right:291px;"><img src="@item.PictureModel.ImageUrl" style="border:7px solid #99282C;width:250px;height:250px;box-sizing:border-box;" class="img-fluid" /></div>*@
+      @if (item.SubCategories.Any())
+      {
+        foreach (var subItem in item.SubCategories)
+        {
+
+          <div class="row subitem-menu mt-5" style="margin-top:-5px;">
+            <div class="col-6 order-12 subitem-link d-flex flex-column" style=""><a href="@Url.RouteUrl("Category", new { SeName = subItem.SeName })" class="">@subItem.Name</a></div>
+            <div class="col-6 order-1 img-subitem ">@*<img src="@subItem.PictureModel.ImageUrl" style="border:7px solid #99282C;width: 250px;height : 250px; box-sizing: border-box;" class="img-fluid " />*@</div>
+          </div>
+        }
+      }
+      @*</div>*@
+    </div>
+  </div>
+
+}
+
+
+<script>
+  //Close header
+  $( "#close-category-header" ).click(function() {
+    $("a[id^='headingCategory-']").each(function() {
+      var id = parseInt(this.id.replace("headingCategory-", ""), 10);
+      $("#dropdownMenuLink-" + id).css("display", "none");
+      $("#headingCategory-" + id).css("text-decoration", "none");
+    });
+
+    //remove all styling
+    $("div[id^='sub-subCategory-']").each(function() {
+      var id_drop = parseInt(this.id.replace("sub-subCategory-", ""), 10);
+      $("#sub-subcategory-" + id_drop).attr('style', 'display: none !important');
+      $("#sub-subCategory-" + id_drop).css("font-weight", "400");
+      $("#sub-subCategory-" + id_drop).css("text-decoration", "none");
+    });
+  });
+
+  //Click sub-subcategory
+  $("div[id^='sub-subCategory-']").hover(
+    function() {
+      var id = parseInt(this.id.replace("sub-subCategory-", ""), 10);
+      $("#sub-subcategory-" + id).attr('style', 'display: flex !important');
+      $("div[id^='sub-subCategory-']").each(function() {
+        var id_drop = parseInt(this.id.replace("sub-subCategory-", ""), 10);
+
+        if (id_drop != id) {
+          $("#sub-subcategory-" + id_drop).attr('style', 'display: none !important');
+          $("#sub-subCategory-" + id_drop).css("text-decoration", "none");
+          $("#sub-subCategory-" + id_drop).css("font-weight", "400");
+        }
+      });
+    }, 
+    function() {
+      var id_drop = parseInt(this.id.replace("sub-subCategory-", ""), 10);
+      $("#sub-subcategory-" + id_drop).attr('style', 'display: flex !important');
+      $("#sub-subCategory-" + id_drop).css("text-decoration", "underline");
+      $("#sub-subCategory-" + id_drop).css("font-weight", "bold");
+
+      $( "#accordionCategory" ).mouseleave(function() {
+        $("div[id^='sub-subCategory-']").each(function() {
+          var id = parseInt(this.id.replace("sub-subCategory-", ""), 10);
+          $("#sub-subcategory-" + id).attr('style', 'display: none !important');
+          $("#sub-subCategory-" + id).css("font-weight", "400");
+          $("#sub-subCategory-" + id).css("text-decoration", "none");
+        });
+      });
+    }
+  );
+
+  //Hover header category
+  $("a[id^='headingCategory-']").hover(
+    function() {
+      var id = parseInt(this.id.replace("headingCategory-", ""), 10);
+      $("#dropdownMenuLink-" + id).css("display", "flex");
+      $("#headingCategory-" + id).css("color", "white !important");
+
+      $("a[id^='headingCategory-']").each(function() {
+        var id_drop = parseInt(this.id.replace("headingCategory-", ""), 10);
+        if (id_drop != id) {
+          $("#dropdownMenuLink-" + id_drop).css("display", "none");
+          $("#headingCategory-" + id_drop).css("text-decoration", "none");
+        }
+      });
+    }, 
+    function() {
+      var id_drop = parseInt(this.id.replace("headingCategory-", ""), 10);
+      $("#dropdownMenuLink-" + id_drop).css("display", "flex");
+      $("#headingCategory-" + id_drop).css("text-decoration", "underline");
+        $("#headingCategory-" + id_drop).css("color", "white !important");
+
+      $("a[id^='headingCategory-']").each(function() {
+        var id = parseInt(this.id.replace("headingCategory-", ""), 10);
+        if (id_drop != id) {
+          $("#dropdownMenuLink-" + id).css("display", "none");
+          $("#headingCategory-" + id).css("text-decoration", "none");
+        }
+      });
+
+      $( "#accordionCategory" ).mouseleave(function() {
+        $("a[id^='headingCategory-']").each(function() {
+          var id = parseInt(this.id.replace("headingCategory-", ""), 10);
+          $("#dropdownMenuLink-" + id).css("display", "none");
+          $("#headingCategory-" + id).css("text-decoration", "none");
+        });
+      });
+
+       $("div[id^='sub-subCategory-']").each(function() {
+        var id_drop = parseInt(this.id.replace("sub-subCategory-", ""), 10);
+        $("#sub-subcategory-" + id_drop).attr('style', 'display: none !important');
+        $("#sub-subCategory-" + id_drop).css("font-weight", "400");
+        $("#sub-subCategory-" + id_drop).css("text-decoration", "none");
+      });
+    }
+  );
+
+
+  $("div[id^='subCategoryPict-']").hover(
+    function() {
+      var pict = this.id.replace("subCategoryPict-", "");
+      $(".header-img-hover").attr("src",pict);
+      //console.log(pict)
+    },
+    function() {
+    }
+  );
+
+  $("a[id^='subCategoryText-']").hover(
+    function() {
+      var id = parseInt(this.id.replace("subCategoryText-", ""), 10);
+      $("#headerImg-" + id).animate({opacity:1},500)
+      $("#headerImg-" + id).css("display", "flex")
+    }, 
+    function() {
+      var id_drop = parseInt(this.id.replace("subCategoryText-", ""), 10);
+      $("#headerImg-" + id_drop).animate({opacity:0},500)
+      $("#headerImg-" + id_drop).css("display", "none")
+    }
+  );
+
+	console.log(`CATEGORY NAVIGATION`);
+	var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+	console.log(model);    
+</script>
+

@@ -1,0 +1,58 @@
+﻿@model Nop.Web.Models.Catalog.ProductOverviewModel
+
+<div class="product-item">
+    <div>
+        <div class="ori-product-img">
+          <a href="@Url.RouteUrl("Product", new { SeName = Model.SeName})" class="clean"><img src="@Model.DefaultPictureModel.ImageUrl" class="img-fluid center-block"/></a>
+        </div>
+
+    </div>
+
+    <div class="description">
+      <p class="text-left m-0" style="line-height: 1.5em;">
+        <a class="clean" style="line-height: 1.5em; font-size: 14px; color: #707070;" href="@Url.RouteUrl("Product", new { SeName = Model.SeName})">
+          @Model.Name
+        </a>
+      </p>
+
+      <div class="prices text-left" style="line-height: 1.5em; padding-top: 0;">
+        @if (Model.ProductPrice.AvailableForPreOrder) {
+          <div class="price">Request A Quote</div>
+        } else {
+          if (!String.IsNullOrEmpty(Model.ProductPrice.OldPrice) || Model.ProductPrice.DisplayTaxShippingInfo)
+          {
+              if (!String.IsNullOrEmpty(Model.ProductPrice.OldPrice))
+              {
+
+                  <div class="price old--price"><span style="color:black;text-decoration:line-through darkgoldenrod"><span style="color:black; font-size: 14px;">@Model.ProductPrice.OldPrice</span></span></div>
+
+              }
+              <div class="price actual--price"><b style="font-size: 14px;">@Model.ProductPrice.Price</b></div>
+          }
+          else
+          {
+              <div class="price" style="font-size: 14px;">@Model.ProductPrice.Price</div>
+          }
+        }
+      </div>
+
+      <p class="text-left m-0" style="line-height: 1.5em; color: brown;">
+        @if (Model.Quantity == 0) {
+          <a style="font-size: 14px; color: darkgoldenrod">Out of Stock</a>
+        } else if (!String.IsNullOrEmpty(Model.ProductPrice.OldPrice) || Model.ProductPrice.DisplayTaxShippingInfo) {
+          <a style="font-size: 14px; color: darkgoldenrod">On Sale</a>
+        } else if (Model.MarkAsNew) {
+          <a style="font-size: 14px; color: darkgoldenrod">New Arrival</a>
+        }
+      </p>
+    </div>
+
+
+</div>
+
+
+<script>
+	//console.log(`PRODUCT BOX`);
+	var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+	//console.log(model);    
+</script>

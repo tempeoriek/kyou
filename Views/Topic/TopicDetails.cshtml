@@ -1,0 +1,53 @@
+﻿@model TopicModel
+@using Nop.Core.Domain.Seo
+@using Nop.Core.Infrastructure
+@using Nop.Web.Models.Topics;
+@{
+  var isPopup = ViewBag.IsPopup;
+  if (isPopup == null || isPopup == false)
+  {
+    
+  }
+  else
+  {
+    /*pop-up windows*/
+    Layout = "~/Views/Shared/_LayoutPopup.cshtml";
+  }
+
+  if (!Model.IsPasswordProtected)
+  {
+    Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Title);
+    Html.AddMetaDescriptionParts(Model.MetaDescription);
+    Html.AddMetaKeywordParts(Model.MetaKeywords);
+  }
+
+  var canonicalUrlsEnabled = EngineContext.Current.Resolve<SeoSettings>().CanonicalUrlsEnabled;
+  if (canonicalUrlsEnabled)
+  {
+    var topicUrl = Url.RouteUrl("Topic", new { SeName = Model.SeName }, this.Request.Url.Scheme);
+    Html.AddCanonicalUrlParts(topicUrl);
+  }
+  @* string absolutepath = HttpContext.Current.Request.Url.AbsolutePath; *@
+   
+}
+
+
+<div class="container">
+  <div class="row">
+      @if (!String.IsNullOrEmpty(Model.Title))
+      {
+        <div class="col-12 text-center">
+          <h1>@Model.Title</h1>
+        </div>
+      }
+  </div>
+  <div class="row d-flex justify-content-center">
+    <div class="col-12 col-md-12">
+      <div class="about-desc" style="">@Html.Raw(Model.Body)</div>
+    </div>
+  </div>
+</div>
+
+
+ 
+  

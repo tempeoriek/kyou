@@ -1,0 +1,175 @@
+﻿@model FooterModel
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@using Nop.Core.Infrastructure
+@using Nop.Web.Models.Common;
+
+@{
+  string absolutepath = HttpContext.Current.Request.Url.AbsolutePath;
+}
+
+@* desktop *@
+<div class="container d-none d-md-block hidden-sm hidden-xs">
+  <div class="row m-1 mt-4">
+    @* about *@
+    <div class="col-12 col-md-3">
+      <h3 style="font-size: 12px; font-weight: bold; color: gray; margin-bottom: 5px">KYOU</h3>
+      <div class="row m-0">
+        <div class="col-12 col-md-6 m-0 p-0">
+          @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn1).ToList())
+          {
+            <a style="color: gray;" style="font-size: 12px;" href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a> <br>
+          }
+        </div>
+      </div>
+    </div>
+
+    @* help *@
+    <div class="col-12 col-md-3">
+      <h3 style="font-size: 12px; font-weight: bold; color: gray; margin-bottom: 5px">HELP</h3>
+      <div class="row m-0">
+        <div class="col-12 col-md-6 m-0 p-0">
+          @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn2).ToList())
+          {
+            <a style="color: gray;" style="font-size: 12px;" href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a> <br>
+          }
+        </div>
+      </div>
+    </div>
+
+    @* sosmed *@
+    <div class="col-12 col-md-3">
+      <h3 style="font-size: 12px; font-weight: bold; color: gray; margin-bottom: 5px">GET SOCIAL</h3>
+      <div class="row m-0">
+        <div class="col-12 col-md-6 m-0 p-0">
+          <a style="font-size: 12px; color: gray;" href="https://www.instagram.com/kyoulabel">Shopee</a> <br>
+          <a style="font-size: 12px; color: gray;" href="https://www.instagram.com/kyoulabel">Instagram</a> <br>
+          <a style="font-size: 12px; color: gray;" href="https://www.instagram.com/kyoulabel">Whatsaap</a> <br>
+        </div>
+      </div>
+    </div>
+
+    @* mailing list *@
+    <div class="col-12 col-md-3">
+      <h3 style="font-size: 12px; margin: 0; margin-bottom: 20px; font-weight: bold; color: gray;">SUBSCRIBE TO OUT NEWSLETTER</h3>
+      <div style="margin-bottom: 10px;">
+        <div id="nieuwsbrief" style="width: 90%;">
+          <form style="margin-left: -4%;" action="" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div class="form-group d-flex justify-content-center mb-4 mb-md-0" style="vertical-align:top;">
+              <input id="mce-EMAIL" class="email form-footer" type="email" style="border-bottom: 1px solid; padding: 11px 0; background-color: white;" name="EMAIL" placeholder="Enter your e-mail here" value="" required="required" />
+              <button id="mc-embedded-subscribe" style="margin-left: -30px; margin-top: 0; type="submit" name="subscribe" value=""><img src="~/Themes/v1/Content/images/arrow.svg" /></button>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_0713301c8224b9979b17bdd9b_0e2ea9797e" tabindex="-1" value=""></div>
+            </div>
+          </form>
+          <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+          <script type='text/javascript'>(function ($) { window.fnames = new Array(); window.ftypes = new Array(); fnames[0] = 'EMAIL'; ftypes[0] = 'email'; fnames[1] = 'FNAME'; ftypes[1] = 'text'; fnames[2] = 'LNAME'; ftypes[2] = 'text'; }(jQuery)); var $mcj = jQuery.noConflict(true);</script>
+        </div>
+        <div id="nieuwsbrief-msg" style="display:none;">
+          Thank you for subscribing!
+        </div>
+      </div>
+      
+      <div class="row m-0">
+        <p style="color:gray;"> &#9400; KYOU <script>document.write(new Date().getFullYear())</script>. Site by <a href="http://flitts.com" style="color: gray;" target="_blank">flitts</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+@* mobile *@
+<div class="container d-block d-md-none hidden-md hidden-lg" style="height: auto; background-color: antiquewhite;">
+  <div id="accordionLeftMenuFooter" aria-multiselectable="true">
+    @* mailing list *@
+    <div class="row px-3 m-1 mt-4" style="padding-top: 8%;">
+      <div class="col-12 p-2">
+        <h3 class="text-center" style="font-size: 12px; margin: 0; margin-bottom: 16px; font-weight: bold; color: gray;">SUBSCRIBE TO OUT NEWSLETTER</h3>
+        <div>
+          <div id="nieuwsbrief" class="d-flex justify-content-center">
+            <form action="" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+
+              <div class="form-group d-flex justify-content-center mb-4 mb-md-0" style="vertical-align:top;">
+                <input id="mce-EMAIL" class="email form-footer" type="email" style="width: 150px; border-bottom: 1px solid; padding: 11px 0; background-color: transparent;" name="EMAIL" placeholder="Enter your e-mail here" value="" required="required" />
+                <button id="mc-embedded-subscribe" style="margin-left: -20px; margin-top: 0; type="submit" name="subscribe" value=""><img src="~/Themes/v1/Content/images/arrow.svg" /></button>
+                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_0713301c8224b9979b17bdd9b_0e2ea9797e" tabindex="-1" value=""></div>
+              </div>
+            </form>
+            <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+            <script type='text/javascript'>(function ($) { window.fnames = new Array(); window.ftypes = new Array(); fnames[0] = 'EMAIL'; ftypes[0] = 'email'; fnames[1] = 'FNAME'; ftypes[1] = 'text'; fnames[2] = 'LNAME'; ftypes[2] = 'text'; }(jQuery)); var $mcj = jQuery.noConflict(true);</script>
+          </div>
+          <div id="nieuwsbrief-msg" style="display:none;">
+            Thank you for subscribing!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    @* about us *@
+    <div class="row px-3 m-1">
+      <div class="col-12 p-2">
+        <div class="head-prod-detail" role="tab" id="HeadingOne" style="border-bottom: 1px solid lightgrey">
+          <a class="acc-prod-detail collapsed" style="color: gray;" role="button" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            KYOU
+          </a>
+        </div>
+        <div data-parent="#accordionLeftMenuFooter" id="collapseOne" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingOne" style="border-bottom: 1px solid lightgrey">
+          @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn1).ToList())
+          {
+            <a style="color: gray;"  href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a> <br>
+          }
+        </div>
+      </div>
+    </div>
+
+    @* help *@
+    <div class="row px-3 m-1">
+      <div class="col-12 p-2">
+        <div class="head-prod-detail" role="tab" id="HeadingTwo" style="border-bottom: 1px solid lightgrey">
+          <a class="acc-prod-detail collapsed" style="color: gray;" role="button" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            HELP
+          </a>
+        </div>
+        <div data-parent="#accordionLeftMenuFooter" id="collapseTwo" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingTwo" style="border-bottom: 1px solid lightgrey">
+          @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn2).ToList())
+          {
+            <a style="color: gray;" href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a> <br>
+          }
+        </div>
+      </div>
+    </div>
+
+
+    @* Sosmed *@
+    <div class="row px-3 m-1">
+      <div class="col-12 p-2">
+        <div class="head-prod-detail" role="tab" id="HeadingThree" style="border-bottom: 1px solid lightgrey">
+          <a class="acc-prod-detail collapsed" style="color: gray;" role="button" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            GET SOCIAL
+          </a>
+        </div>
+        <div data-parent="#accordionLeftMenuFooter" id="collapseThree" class="p-2 collapse" role="tabpanel" aria-labelledby="HeadingThree" style="border-bottom: 1px solid lightgrey">
+          <a style="color: gray;" href="https://www.instagram.com/kyoulabel">Shopee </a> <br>
+          <a style="color: gray;" href="https://www.instagram.com/kyoulabel">Instagram</a> <br>
+          <a style="color: gray;" href="https://www.instagram.com/kyoulabel">Whatsapp</a> <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="row px-3 m-1 mt-4 d-flex justify-content-center align-item-center">
+      <p style="color: gray;">KYOU <script>document.write(new Date().getFullYear())</script>. Site by <a href="http://flitts.com" target="_blank" style="color: gray;">flitts</a></p>
+    </div>
+  </div> 
+</div>
+  
+
+<script>
+  $("#mc-embedded-subscribe").click(function () {
+    $("#nieuwsbrief").css("display", "none");
+    $("#nieuwsbrief-msg").css("display", "block");
+  });
+
+  $("#mc-embedded-subscribe-mobile").click(function () {
+    $("#nieuwsbrief").css("display", "none");
+    $("#nieuwsbrief-msg").css("display", "block");
+  });
+</script>
+

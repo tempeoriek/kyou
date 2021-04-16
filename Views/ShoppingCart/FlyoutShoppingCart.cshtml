@@ -1,0 +1,119 @@
+﻿@model MiniShoppingCartModel
+@using Nop.Web.Models.ShoppingCart;
+
+
+
+
+<!--collapse bag cart-->
+<div class="flyout-cart" id="flyout-cart">
+  <div class="p-4" id="bagcart">
+    <div class="collapsed-cart">
+      <div class="count text-center">
+        @if (Model.TotalProducts == 0)
+        {
+          @T("ShoppingCart.Mini.NoItems")
+
+        }
+        else
+        {
+          <div class="row d-flex justify-content-between align-items-center m-0 mb-3" style="border-bottom: 1px solid lightgray; padding-bottom: 5px;">
+            <div class="text-left"><h3 style="color: gray">CART</h3></div>
+
+            <div style="text-align: right;">
+              @* <h3>@string.Format("Total {0} Items", Model.TotalProducts)</h3> *@
+              <p class="m-0" style="color: gray" data-dismiss="aside" aria-hidden="true">Close</p>
+              @*@Html.Raw(string.Format(T("ShoppingCart.Mini.ItemsText").Text, string.Format("{1}", Url.RouteUrl("ShoppingCart"), string.Format(T("ShoppingCart.Mini.Items").Text, Model.TotalProducts))))*@
+            </div>
+          </div>
+        }
+      </div>
+      @if (Model.TotalProducts > 0)
+      {
+        <div class="items scroll-cart scroll--simple">
+          <div class="inner">
+            @for (int i = 0; i < Model.Items.Count; i++)
+            {
+              var item = Model.Items[i];
+              <div class="row item @(i == 0 ? "first" : null)" style="margin-right: 9px; border-bottom: 1px solid lightgray; padding-bottom: 15px;">
+                <div class="col-4 col-sm-4 col-md-4 text-center">
+                    <a href="@Url.RouteUrl("Product", new { SeName = item.ProductSeName })" title="@item.Picture.Title">
+                      <img class="img-fluid" alt="@item.Picture.AlternateText" src="@item.Picture.ImageUrl" title="@item.Picture.Title" />
+                    </a>
+                    @*@if (Model.ShowProductImages)
+                  {
+                  }*@
+                </div>
+                <div class="col-8 col-sm-8 col-md-8">
+                  <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 name"><a href="@Url.RouteUrl("Product", new { SeName = item.ProductSeName })" style="color: gray; line-height: 17px;">@item.ProductName</a></div>
+                    <div class="col-6 col-sm-6 col-md-6 price" style="text-align: right;"><a href="@Url.RouteUrl("Product", new { SeName = item.ProductSeName })" style="color: gray;">@item.UnitPrice</a> </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 name">
+                      @if (!String.IsNullOrEmpty(item.AttributeInfo))
+                      {
+                        <div class="attributes">
+                          @Html.Raw(item.AttributeInfo)
+                        </div>
+                      }
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 name"><a style="color: gray; line-height: 17px;">Qty:</a></div>
+                    <div class="col-6 col-sm-6 col-md-6 price" style="text-align: right;"><a style="color: gray;">@item.Quantity</a> </div>
+                  </div>
+
+                </div>
+              </div><br />
+            }
+          </div>
+        </div>
+        <div class="cart-checkout" style="margin-top:20px;">
+          <hr />
+          <div class="cart-total" style="margin-bottom: 10px;">
+            <h3 style="color: gray;">Subtotal</h3>
+            <h3 style="color: gray;">@Model.SubTotal</h3>
+          </div>
+
+          @if (Model.DisplayShoppingCartButton)
+          {
+            <input type="button" value="VIEW CART" class="btn btn-inverse btn-block mt-2" onclick="setLocation('@(Url.RouteUrl("ShoppingCart"))')" />
+
+          }
+
+          @{
+            @*if (Model.DisplayCheckoutButton)*@
+            var checkoutUrl = "";
+            if (Model.AnonymousCheckoutAllowed && Model.CurrentCustomerIsGuest)
+            {
+              checkoutUrl = Url.RouteUrl("LoginCheckoutAsGuest", new { returnUrl = Url.RouteUrl("ShoppingCart") });
+            }
+            else
+            {
+              checkoutUrl = Url.RouteUrl("Checkout");
+            }
+            <button class="btn btn-inverse btn-block mt-20" onclick="setLocation('@checkoutUrl')"><span>PROCEED TO CHECKOUT</span></button>
+          }
+
+        </div>
+      }
+
+
+
+    </div>
+
+  </div>
+
+</div>
+
+<!--end of collapse bag cart-->
+
+<script>
+  //console.log(`CART`);
+  var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+  //console.log(model);    
+</script>
+
+
+

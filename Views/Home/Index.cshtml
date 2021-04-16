@@ -1,0 +1,366 @@
+﻿@model IEnumerable<Nop.Web.Models.Flitts.Homepage.HomepageViewModel>
+
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@* subcribe *@
+@* @Html.Partial("SubcribeHomepage") *@
+
+<div class="">@Html.Action("HeaderLinks", "Common")</div>
+
+
+@if (Model != null)
+{
+  if (Model.Any())
+  {
+    foreach (var item in Model)
+    {
+      @* Slider *@
+      if (item.Id == 1)
+      {
+        <div class="container-fluid">
+          @if (item.DesktopItems.Any())
+          {
+            <div class="row d-none d-md-block hidden-xs hidden-sm carousel slide mb-5" data-ride="carousel" id="carouselDesktop">
+              <div class="carousel-inner col-12 d-block d-md-block">
+                <div class="carousel-item active position-relative">
+                  <a href="@item.DesktopItems[0].NavigateTo" class="">
+                    <img class="d-block w-100" src="@item.DesktopItems[0].PictureUrl">
+                  </a>
+                </div>
+              </div>
+            @* <div class="row d-none d-md-block hidden-xs hidden-sm carousel slide mb-5" data-ride="carousel" id="carouselDesktop">
+              <div class="carousel-inner col-12 d-block d-md-block">
+                @{
+                  var index = 0;
+                  var firstactive = "active";
+                  foreach (var img in item.DesktopItems)
+                  {
+                    if (index > 0)
+                    {
+                      firstactive = "";
+                    }
+
+                    <div class="carousel-item @firstactive position-relative">
+                      <a href="@img.NavigateTo" class="">
+                        <img class="d-block w-100" src="@img.PictureUrl" style="margin-top: 6%;">
+                      </a>
+                      
+                    </div>
+
+                    index++;
+
+                  }
+                }
+              </div> *@
+              @* <div class="row" style="position: absolute; bottom: 15%; right: 11%">
+                <div class="mr-5">
+                  <a href="#carouselDesktop" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </div>
+                <div>
+                  <a href="#carouselDesktop" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+              </div> *@
+            </div>
+          }
+
+          @if (item.MobileItems.Any())
+          {
+            <div class="row d-block d-md-none hidden-md hidden-xl carousel slide mb-3">
+              <a href="@item.MobileItems[0].NavigateTo">
+                <img class="d-block w-100" src="@item.MobileItems[0].PictureUrl">
+              </a>
+            </div>
+          }
+        </div>
+      }
+
+      @* row 2 *@
+      @* if (item.Id == 2)
+      {
+        if (item.DesktopItems.Any()) {
+          <div class="container d-none d-md-block hidden-xs hidden-sm">
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-5 col-md-5 col-sm-5" style="padding: 5% !important;">
+                <div style="height: 20%; display: flex; justify-content: flex-start; align-items: flex-end;">
+                  <h1 style= font-weight: bold;">New ‘Era’ Collection</h1>
+                </div>
+                <div>
+                  <p>The balance of beauty. Pure geometric lines, comfort and lightness are the hallmarks of this collection with multiple vocations, which oï¬€er intelligent and compact solutions for furnishing the bathroom in a dynamic and versatile way. The sanitary ware of the collection foresees the use of the new rimless 2.0 discharge technology, a true revolution from an aesthetic and functional point of view.</p>
+                </div>
+                <div style="margin-top: 15%;">
+                  <button class="explore-now-home">EXPLORE NOW</button>
+                  <button class="buy-now-home">Buy Now</button>
+                </div>
+              </div>
+              <div class="col-5 col-md-5 col-sm-5" style="padding: 10px !important">
+                <a href="#">
+                  <img src="@item.DesktopItems[0].PictureUrl" class="img-fluid w-100" style="height: 100%;" />
+                </a>
+              </div>
+              <div class="col-1"></div>
+            </div>
+          </div>
+        }
+
+        if (item.MobileItems.Any()) {
+          <div class="container d-block d-md-none hidden-md hidden-xl">
+            <div class="row" style="padding: 30px 45px 0;">
+              <div class="col-12 col-sm-12">
+                <p style="font-size: 28px; font-style: italic; font-weight: bold;">New ‘Era’ Collection</p>
+              </div>
+            </div>
+
+            <div class="row" style="padding: 0 45px;">
+              <div class="col-12 col-sm-12">
+                <p style="font-size: 16px;">The balance of beauty. Pure geometric lines, comfort and lightness are the hallmarks of this collection with multiple vocations, which oï¬€er intelligent and compact solutions for furnishing the bathroom in a dynamic and versatile way. The sanitary ware of the collection foresees the use of the new rimless 2.0 discharge technology, a true revolution from an aesthetic and functional point of view.</p>
+              </div>
+            </div>
+
+            <div class="row" style="padding: 30px 45px;">
+              <div class="col-5 col-sm-5 p-0">
+                <button class="explore-now-home">EXPLORE NOW</button>
+              </div>
+              <div class="col-7 col-sm-7">
+                <button class="buy-now-home">Buy Now</button>
+              </div>
+            </div>
+
+            <div class="row">
+              <a href="#">
+                <img src="@item.MobileItems[0].PictureUrl" class="img-fluid w-100" style="height: 100%;" />
+              </a>
+            </div>
+          </div>
+        }
+
+      } *@
+
+    }
+  }
+}
+
+<div class="row" style="margin-top: 5%; margin-bottom: 5%;">
+  <div class="col-12 col-md-12 d-flex justify-content-center">
+    <h1 class="d-none d-md-block" style="color: gray; font-weight: bold; font-size: 20px;">NEW ARRIVALS</h1>
+    <h1 class="d-block d-md-none" style="color: gray; font-weight: bold; font-size: 14px;">NEW ARRIVALS</h1>
+  </div>
+</div>
+
+
+@* Best Seller ? *@
+@Html.Action("HomepageBestSellers", "Product")
+
+@* Best Seller Desktop *@
+<div class="d-none d-md-block hidden-xs hidden-sm position-relative">
+  <div class="row mb-5">
+    <div class="carouseldesktop hidden-sm p-0">
+      @for (int i = 0; i < 4; i++)
+      {
+
+        <div class="col-12 col-md-12 col-sm-12" style="border-left: 1px solid lightgray;">
+          <div class="row" style="padding: 0 4rem;">
+            <img src="~/Themes/v1/Content/images/product1.jpg" class="img-fluid center-block" />
+          </div>
+
+          <div class="row" style="padding: 0 4rem;font-size: 16px; line-height: 19px; margin-top: 5px;">
+            <p style="color: gray; font-weight: 600;">Set Soft Pink</p>
+          </div>
+          <div class="row" style="padding: 0 4rem;margin-top: -10px; font-size: 14px;">
+            <p style="color: gray;">IDR 699.000</p>
+          </div>
+        </div>
+
+      }
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div style="position: absolute; top: 40%; left: 34%;">
+      <a class="prevslider" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </div>
+    <div style="position: absolute; top: 40%; right: 34%;">
+      <a class="nextslider" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+@* Best Seller Mobile *@
+<div class="row d-block d-md-none hidden-md hidden-xl">
+  <div class="row mb-5" id="carouselExampleControlsBestItems">
+    <div class="carouselmobile hidden-sm m-0">
+      @for (int i = 0; i < 4; i++)
+      {
+        <div class="col-12 col-md-12 col-sm-12">
+          <div class="row px-4" style="display: flex; justify-content: center; align-items: center;">
+            <img src="~/Themes/v1/Content/images/product1.jpg" class="img-fluid center-block" />
+          </div>
+          
+          <div class="row px-4" style="font-size: 16px; line-height: 19px; margin-top: 10px;">
+            <p style="font-size: 12px; color: gray; font-weight: 600;">Set Soft Pink</p>
+          </div>
+          <div class="row px-4" style="margin-top: -10px; font-size: 14px;">
+            <p style="font-size: 12px; color: gray;">IDR 699.000</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+
+
+@*Instagram*@
+<div class="row">
+  <div class="col-12 text-center">
+    <h1 class="mb-3 d-none d-md-block" style="color: gray; font-size: 20px; font-weight: bold">On the Gram</h1>
+    <h1 class="mb-3 d-block d-md-none" style="color: gray; font-size: 14px; font-weight: bold">On the Gram</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="carouseldesktopig d-none d-md-block hidden-xs hidden-sm p-0">
+      @for (int i = 0; i < 5; i++) {
+        <div><img src="~/Themes/v1/Content/images/ig-home.png" class="img-fluid"></div>
+      }
+    </div>
+    <div class="carouselmobileig d-block d-md-none hidden-md hidden-xl p-0">
+      @for (int i = 0; i < 4; i++) {
+        <div><img src="~/Themes/v1/Content/images/ig-home.png" class="img-fluid px-5"></div>
+      }
+    </div>
+  </div>
+
+</div>
+
+<input type="hidden" id="flag" value="0" />
+
+@Html.Action("Footer", "Common")
+
+@section RootHeaderSection{
+
+  <link rel="stylesheet" type="text/css" href="~/Scripts/app/slick/slick.css">
+  <link rel="stylesheet" type="text/css" href="~/Scripts/app/slick/slick-theme.css">
+
+  <link href="~/Themes/v1/Content/homepage.css" rel="stylesheet" />
+
+  <style>
+    .col-12, .col-6 {
+      padding: 0 !important;
+    }
+  </style>
+}
+
+@section RootScripts{
+
+  <script>
+    $(document).ready(function () {
+      $('.carousel').carousel({
+        touch: true
+      });
+
+    });
+
+  </script>
+
+  <script src="~/Scripts/app/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('.carouselhero').slick({
+        slidesToShow: 1,
+        dots: false,
+        centerMode: false,
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 2000,
+      });
+    });
+    $(document).ready(function () {
+      $('.carouselhero2').slick({
+        slidesToShow: 1,
+        dots: false,
+        centerMode: false,
+        arrows: false,
+      });
+    });
+    $(document).ready(function () {
+      $('.carouseldesktop').slick({
+        slidesToShow: 3,
+        centerMode: false,
+      });
+    });
+    $(document).ready(function () {
+      $('.carouseldesktopig').slick({
+        slidesToShow: 4,
+        dots: false,
+        centerMode: false,
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 2000,
+      });
+    });
+    $(document).ready(function () {
+      $('.carouselmobile').slick({
+        slidesToShow: 3,
+        dots: false,
+        centerMode: false,
+        arrows: false,
+      });
+    });
+
+    $(document).ready(function () {
+      $('.carouselmobileig').slick({
+        slidesToShow: 1,
+        dots: false,
+        centerMode: false,
+        arrows: false,
+      });
+    });
+    $('.prevslider').click(function () {
+      $('.carouseldesktop').slick('slickPrev');
+    })
+
+    $('.nextslider').click(function () {
+      $('.carouseldesktop').slick('slickNext');
+    })
+    $('.left').click(function () {
+      $('.carouselmobile').slick('slickPrev');
+    })
+
+    $('.right').click(function () {
+      $('.carouselmobile').slick('slickNext');
+    })
+    
+  </script>
+
+
+
+}
+<script>
+  $(".close-subcribe").click(function () {
+    $('.modal-subcribe').attr('style', 'display: none !important');
+    $('.modal-subcribe-mobile').attr('style', 'display: none !important');
+    $(".aside-backdrop").removeClass("in");
+    $('.aside-backdrop').attr('style', 'z-index: -1 !important');
+  });
+	//console.log(`HOME`);
+	var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+	//console.log(model);    
+</script>
