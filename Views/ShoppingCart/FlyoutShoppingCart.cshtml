@@ -21,7 +21,7 @@
 
             <div style="text-align: right;">
               @* <h3>@string.Format("Total {0} Items", Model.TotalProducts)</h3> *@
-              <p class="m-0" style="color: gray" data-dismiss="aside" aria-hidden="true">Close</p>
+              <p class="m-0" style="color: gray; cursor: pointer;" data-dismiss="aside" aria-hidden="true">Close</p>
               @*@Html.Raw(string.Format(T("ShoppingCart.Mini.ItemsText").Text, string.Format("{1}", Url.RouteUrl("ShoppingCart"), string.Format(T("ShoppingCart.Mini.Items").Text, Model.TotalProducts))))*@
             </div>
           </div>

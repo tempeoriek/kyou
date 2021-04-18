@@ -57,7 +57,7 @@
       @Html.Partial("_ProductDetailsPictures", Model)
     </div>
 
-    <div class="col-12 col-sm-5 col-md-5 p-4 d-none d-md-block">
+    <div class="col-12 col-sm-5 col-md-5" style="padding: 0 4rem;">
       @using (Html.BeginRouteForm("Product", new { SeName = Model.SeName }, FormMethod.Post, new { id = "product-details-form" }))
       {
         <div itemscope itemtype="http://schema.org/Product" data-productid="@Model.Id" style="margin-top: 5%;">
@@ -143,7 +143,7 @@
       }
     </div>
 
-    <div class="col-12 col-sm-5 col-md-5 d-block d-md-none mt-4" style="padding: 0 4rem;">
+    @* <div class="col-12 col-sm-5 col-md-5 d-block d-md-none mt-4" style="padding: 0 4rem;">
       @using (Html.BeginRouteForm("Product", new { SeName = Model.SeName }, FormMethod.Post, new { id = "product-details-form" }))
       {
         <div itemscope itemtype="http://schema.org/Product" data-productid="@Model.Id" style="margin-top: 5%;">
@@ -153,9 +153,6 @@
             var dataDictPrice = new ViewDataDictionary();
             dataDictPrice.TemplateInfo.HtmlFieldPrefix = string.Format("price_{0}", Model.Id);
             
-            @* TESTING *@
-            @* Model.AddToCart.AvailableForPreOrder = true; *@
-
             if (Model.AddToCart.AvailableForPreOrder) {
               <div class="description pb-2" style="color: gray;">
                 PRE-ORDER
@@ -165,11 +162,8 @@
             }
           }
 
-          @* <hr class="pb-2" style="margin: 0; border-top: 1px solid lightgray;"> *@
-          
 
           @{
-            //notify me if oos
             var totalstock = 0;
             if (Model.ProductAttributeCombinations != null) {
               totalstock = 1;
@@ -183,7 +177,6 @@
               }
             }
 
-          @* logic AvailableForPreOrder *@
             if (totalstock >= 1)
             {
               <div class="row no-gutters">
@@ -214,8 +207,6 @@
             }
             else
             {
-              <!--Back in stock subscription-->
-              @*@Html.Partial("_BackInStockSubscription", Model)*@
 
               <p class="out-of-stock" style="font-style:italic;">
                 Sorry, this product is completely Sold Out
@@ -227,7 +218,7 @@
           
         </div>
       }
-    </div>
+    </div> *@
   </div>
   
 
