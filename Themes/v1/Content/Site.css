@@ -706,7 +706,6 @@ a[class*="child-acc-category-"] {
 .category-item:hover,
 .category-item:active,
 .category-item:focus {
-    color: #000 !important;
     text-decoration:none;
 }
 
@@ -2064,7 +2063,7 @@ a.dropdown-item {
 }
 
 .about-desc {
-    margin-top: 150px;
+    margin-top: 50px;
 }
 .nav{font-family:'ttcommons';}
 

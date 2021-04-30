@@ -95,6 +95,7 @@
                           <input id="@(controlId)_@(attributeValue.Id)" type="radio" name="@(controlId)" value="@attributeValue.Id"
                             checked="@attributeValue.IsPreSelected"
                             data-toggle="collapse" data-target="#collapseAdd2Bag" aria-expanded="false" aria-controls="collapseAdd2Bag" />
+                          @* <label for="@(controlId)_@(attributeValue.Id)" style="font-size: 16px;">@attributeName</label> *@
                           <label for="@(controlId)_@(attributeValue.Id)" style="font-size: 16px;">@attributeValue.Name</label>
                         </li>
                       }
