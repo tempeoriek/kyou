@@ -55,16 +55,19 @@
 	var menu_icon = "";
 	var bag_icon = "";
 	var cart_number = "";
+	var bckground_color = "";
 	if (absolutepath.Equals("/")) {
 		src_img = "./Themes/v1/Content/images/search.png";
 		menu_icon = "./Themes/v1/Content/images/menu-white.png";
 		bag_icon = "./Themes/v1/Content/images/bag-white.png";
 		cart_number = "color: white !important";
+		bckground_color = "background-color: transparent; height: 70px;";
 	} else {
 		src_img = "./Themes/v1/Content/images/search.svg";
 		menu_icon = "./Themes/v1/Content/images/menu-black.png";
 		bag_icon = "./Themes/v1/Content/images/bag-black.png";
 		cart_number = "color: gray !important";
+		bckground_color = "background-color: white; height: 70px;";
 	}
 }
 
@@ -78,7 +81,7 @@
     </div>
 </div>
 
-<div class="fixed-top d-none d-md-block hidden-xs hidden-sm" style="background-color: transparent; height: 70px;">
+<div class="fixed-top d-none d-md-block hidden-xs hidden-sm" style="@bckground_color">
 	
 	@* new nav bar full width dropdown *@
 	@Html.Action("CategoryNavigation", "Catalog", new {saleall = saleall, about = about, newproduct = newproduct, contact = contact, currentCategoryId = currentCategoryId, currentProductId = currentProductId, isSidebar = false })

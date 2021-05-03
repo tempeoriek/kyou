@@ -1,7 +1,11 @@
 ﻿@font-face {
     font-family: 'brandon';
     src: 
-        url('../../../fonts/BrandonGrotesque/Brandon_reg.otf') format('opentype');
+        url('../../../fonts/BrandonGrotesque/Brandon-Regular.woff2') format('woff2')
+        url('../../../fonts/BrandonGrotesque/Brandon-Regular.woff') format('woff'),
+        url('../../../fonts/BrandonGrotesque/Brandon_reg.woff') format('woff'),
+        url('../../../fonts/BrandonGrotesque/Brandon_reg.otf') format('opentype'),
+        url('../../../fonts/BrandonGrotesque/Brandon-Regular.ttf') format('truetype');
     font-weight:normal;
     font-display:swap;
 }
