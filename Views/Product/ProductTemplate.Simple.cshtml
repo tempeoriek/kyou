@@ -62,7 +62,7 @@
       {
         <div itemscope itemtype="http://schema.org/Product" data-productid="@Model.Id" style="margin-top: 5%;">
 
-          <p itemprop="name" style="font-weight: bold; margin-bottom: 1%; color: gray; line-height: 0">@Model.Name</p>
+          <p itemprop="name" style="font-weight: bold; margin-bottom: 1%; color: gray; line-height: 10px; font-size: 14px;">@Model.Name</p>
           @{
             var dataDictPrice = new ViewDataDictionary();
             dataDictPrice.TemplateInfo.HtmlFieldPrefix = string.Format("price_{0}", Model.Id);

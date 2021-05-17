@@ -33,7 +33,7 @@
 
   <div class="form-login">
     <div class="text-center">
-      <h2 id="title" style="font-size: 35px; font-weight: bold; font-style: italic;">Log In</h2>
+      <p id="title" style="font-size: 35px; font-weight: bold; color: #D9BE9B; margin-top: 20%;">LOGIN</p>
       <p id="subtitle" style="font-size: 14px;">Please log in or sign up for an account</p>
     </div>
 
@@ -179,7 +179,7 @@
         $('#title').text('Log in');
         $('#subtitle').text('Please log in or sign up for an account');
       } else if ($("#signup-nav").hasClass("active")) {
-        $('#title').text('Create Account');
+        $('#title').text('CREATE ACCOUNT');
         $('#subtitle').text('Creating an account has many benefits: check out faster, keep more than one address, track orders and more.');
       }
     });  
@@ -195,7 +195,7 @@
 
     $("#signup-nav").click(function(){  
       setTimeout(function() { 
-        $('#title').text('Create Account');
+        $('#title').text('CREATE ACCOUNT');
         $('#subtitle').text('Creating an account has many benefits: check out faster, keep more than one address, track orders and more.');
         $('#signin').removeClass('active');
         $('#signup').addClass('show active');

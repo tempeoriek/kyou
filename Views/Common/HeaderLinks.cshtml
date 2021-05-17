@@ -108,9 +108,9 @@
 							cartItem = string.Format("{0}", Model.ShoppingCartItems);
 							cssCartItem = "shopping-bag";
 						}
-						<a href="#bag" onclick="$('.aside').asidebar('open')" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: white;</text>} else {<text>color: gray;</text>}">
+						<a href="#bag" onclick="$('.aside').asidebar('open')" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: #D9BE9B;</text>} else {<text>color: gray;</text>}">
 							<div id="icbag-panel" class="@cssCartItem align-items-center">
-								<span>CART (<span id="mCartItemsQty" class="cart-qty" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: white;</text>} else {<text>color: gray;</text>}" style="@cart_number">@cartItem</span>)</span>
+								<span>CART (<span id="mCartItemsQty" class="cart-qty" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: #D9BE9B;</text>} else {<text>color: gray;</text>}" style="@cart_number">@cartItem</span>)</span>
 							</div>
 						</a>
 
@@ -129,7 +129,7 @@
 						<ul class="list-unstyled list-inline" style="margin: 0;">
 							<li>
 								<div class="dropdown">
-									<a href="#" class="nav-item" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: white;</text>} else {<text>color: gray;</text>}">MY ACCOUNT</a>
+									<a href="#" class="nav-item" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: #D9BE9B;</text>} else {<text>color: gray;</text>}">MY ACCOUNT</a>
 									<div class="dropdown-content2 text-left">
 										<a href="~/order/ConfirmPayments">Confirm Payment</a>
 										<a href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a>
@@ -145,7 +145,7 @@
 					else
 					{
 						<div> 
-							<a href="~/login" class="signin btn-login" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: white;</text>} else {<text>color: gray;</text>}">LOGIN / REGISTER</a>
+							<a href="~/login" class="signin btn-login" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: #D9BE9B;</text>} else {<text>color: gray;</text>}">LOGIN / REGISTER</a>
 						</div>
 					}
 				</div>
@@ -232,7 +232,7 @@
 						@* category title in navbar *@
 						<div class="row mb-4">
 							<div class="col-4 d-flex justify-content-start align-items-center">
-								<span class="closebtn" onclick="closeMenu()" title="Close Overlay" style="font-size: 37px; padding-left: 20%; color: white;">×</span>
+								<span class="closebtn" onclick="closeMenu()" title="Close Overlay" style="font-size: 37px; padding-left: 20%; color: #D9BE9B;">×</span>
 							</div>
 							
 							<div class="col-4 d-flex justify-content-center align-items-center">
@@ -245,18 +245,18 @@
 							@* category menu in navbar *@
 							<ul class="list-unstyled list-inline" style="width: 100%;">
 								<li class="dropdown dropright-list header-categories">
-										<a class="dropbtn child-categories collapsed" style="font-size:14px; color: white; padding: 0;" data-toggle="collapse" data-target="#collapse-nav3" aria-expanded="false" aria-controls="collapse-nav3">SHOP</a>
+										<a class="dropbtn child-categories collapsed" style="font-size:14px; color: #D9BE9B; padding: 0;" data-toggle="collapse" data-target="#collapse-nav3" aria-expanded="false" aria-controls="collapse-nav3">SHOP</a>
 										<div class="collapse" id="collapse-nav3" style="padding-left: 8%; width: 300px;">
 											@Html.Action("CategoryNavigation", "Catalog", new { currentCategoryId = currentCategoryId, currentProductId = currentProductId, isMobile = true })
 										</div>
 								</li>
 							</ul>
-							<a href="/about" class="signin btn-login" style="padding: 0; font-size:14px; color: white !important">ABOUT US</a>
+							<a href="/about" class="signin btn-login" style="padding: 0; font-size:14px; color: #D9BE9B !important">ABOUT US</a>
 							<ul class="list-unstyled list-inline" style="width: 100%;">
 								@if (Model.IsAuthenticated)
 								{
 									<li class="dropdown dropright-list">
-										<a href="@Url.RouteUrl("CustomerInfo")" class="dropbtn mb-2" style="font-size:14px; color: white; padding: 0;" data-toggle="collapse" data-target="#collapse-nav2" aria-expanded="false" aria-controls="collapse-nav2">MY ACCOUNT</a>
+										<a href="@Url.RouteUrl("CustomerInfo")" class="dropbtn mb-2" style="font-size:14px; color: #D9BE9B; padding: 0;" data-toggle="collapse" data-target="#collapse-nav2" aria-expanded="false" aria-controls="collapse-nav2">MY ACCOUNT</a>
 										<div class="collapse" id="collapse-nav2" style="padding-left: 8%; width: 300px;">
 											<a class="mb-2" style="color: white; font-size: 14px; padding: 0;" href="~/order/ConfirmPayments">Confirm Payment</a>
 											<a class="mb-2" style="color: white; font-size: 14px; padding: 0;" href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a>
@@ -269,7 +269,7 @@
 								}
 								else
 								{
-									<li><a href="~/login" class="signin btn-login" style="padding: 0;font-size:14px; color: white">LOGIN / REGISTER</a></li>
+									<li><a href="~/login" class="signin btn-login" style="padding: 0;font-size:14px; color: #D9BE9B">LOGIN / REGISTER</a></li>
 								}
 								
 

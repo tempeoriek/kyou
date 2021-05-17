@@ -139,7 +139,7 @@
       @if (category.SubCategories.Any())
       {
         <div class="header-categories">
-          <a class="menu-shop child-categories collapsed" data-toggle="collapse" href="#collapse-@category.SeName" role="button" aria-expanded="false" style="color: white; font-size: 16px;" aria-controls="collapse-@category.SeName">@category.Name.ToUpper()</a>
+          <a class="menu-shop child-categories collapsed" data-toggle="collapse" href="#collapse-@category.SeName" role="button" aria-expanded="false" style="color: #D9BE9B; font-size: 16px;" aria-controls="collapse-@category.SeName">@category.Name.ToUpper()</a>
         </div>
         <div class="collapse c-@category.SeName" id="collapse-@category.SeName" style="margin-bottom: 5px; margin-left: 15px;">
           <ul class="list-unstyled sub-cat">
@@ -147,14 +147,14 @@
             {
                 string cssActive = "";
 
-                <li class="subcat"><a style="color: white; font-size: 14px; font-weight: 600; font-style: italic;" href="@Url.RouteUrl("Category", new { SeName = subCategory.SeName })">@subCategory.Name</a></li>
+                <li class="subcat"><a style="color: #D9BE9B; font-size: 14px; font-weight: 600; font-style: italic;" href="@Url.RouteUrl("Category", new { SeName = subCategory.SeName })">@subCategory.Name</a></li>
             }
           </ul>
         </div>
       }
       else
       {
-        <a href="@Url.RouteUrl("Category", new { SeName = category.SeName })" style="color: white; font-size: 16px;" class="@if (category.Id == Model.CurrentCategoryId) {<text>active</text>} else {<text>inactive</text>}">@category.Name.ToUpper()</a>
+        <a href="@Url.RouteUrl("Category", new { SeName = category.SeName })" style="color: #D9BE9B; font-size: 16px;" class="@if (category.Id == Model.CurrentCategoryId) {<text>active</text>} else {<text>inactive</text>}">@category.Name.ToUpper()</a>
       }
     </li>
     
@@ -187,10 +187,10 @@
               if (category.SubCategories.Any())
               {
                 if (index == 0) {
-                  <a id="headingCategory-@category.Id" class="category-item" style="@if (absolutepath.Equals("/")) {<text>color: white !important;</text>} else {<text>color: gray;</text>}" role="button" @* href="/@category.SeName" *@>
+                  <a id="headingCategory-@category.Id" class="category-item" style="@if (absolutepath.Equals("/")) {<text>color: #D9BE9B !important;</text>} else {<text>color: gray;</text>}" role="button" @* href="/@category.SeName" *@>
                     @category.Name.ToUpper()
                   </a>
-                  <a class="category-item headabout" href="/about" style="@if (absolutepath.Equals("/")) {<text>color: white !important;</text>} else {<text>color: gray;</text>}">
+                  <a class="category-item headabout" href="/about" style="@if (absolutepath.Equals("/")) {<text>color: #D9BE9B !important;</text>} else {<text>color: gray;</text>}">
                     ABOUT US
                   </a>
                 }
@@ -225,7 +225,7 @@
               <div class="list-group">
                 <ul class="list-unstyled">
                   <li>
-                    <a style="color: white; font-size: 16px;" href="/new-arrival">NEW ARRIVAL</a>
+                    <a style="color: #D9BE9B; font-size: 16px;" href="/new-arrival">NEW ARRIVAL</a>
                   </li>
 
                   @foreach (var categories in Model.Categories)
@@ -235,11 +235,11 @@
 
                   @*Content*@
                   <li>
-                    <a style="color: white; font-size: 16px;" href="/best-seller">BEST SELLER</a>
+                    <a style="color: #D9BE9B; font-size: 16px;" href="/best-seller">BEST SELLER</a>
                   </li>
 
                   <li>
-                    <a style="color: white; font-size: 16px;" href="/sale">SALE</a>
+                    <a style="color: #D9BE9B; font-size: 16px;" href="/sale">SALE</a>
                   </li>
 
                 </ul>
@@ -338,8 +338,8 @@
     function() {
       var id = parseInt(this.id.replace("headingCategory-", ""), 10);
       $("#dropdownMenuLink-" + id).css("display", "flex");
-      $("#headingCategory-" + id).attr('style', 'color: white !important');
-      $(".headabout").attr('style', 'color: white !important');
+      $("#headingCategory-" + id).attr('style', 'color: #D9BE9B !important');
+      $(".headabout").attr('style', 'color: #D9BE9B !important');
 
       $("a[id^='headingCategory-']").each(function() {
         var id_drop = parseInt(this.id.replace("headingCategory-", ""), 10);
@@ -369,8 +369,8 @@
           $("#dropdownMenuLink-" + id).css("display", "none");
           $("#headingCategory-" + id).css("text-decoration", "none");
           if (path == '/') {
-            $("#headingCategory-" + id_drop).attr('style', 'color: white !important');
-            $(".headabout").attr('style', 'color: white !important');
+            $("#headingCategory-" + id_drop).attr('style', 'color: #D9BE9B !important');
+            $(".headabout").attr('style', 'color: #D9BE9B !important');
           } else {
             $("#headingCategory-" + id_drop).attr('style', 'color: gray !important');
             $(".headabout").attr('style', 'color: gray !important');

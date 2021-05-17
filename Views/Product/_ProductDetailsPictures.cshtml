@@ -11,7 +11,7 @@
     <div class="carousel slide col-md-2 p-0 d-none d-md-block">
       @foreach (var imgs in Model.PictureModels) {
         <a href="@imgs.FullSizeImageUrl" data-fancybox="gallery">
-          <img class="img-fluid w-100" src="@imgs.FullSizeImageUrl" />
+          <img class="img-fluid w-100" src="@imgs.FullSizeImageUrl" style="height: 20%;" />
         </a>
 
       }
