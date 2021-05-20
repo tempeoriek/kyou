@@ -1,9 +1,8 @@
 ﻿@font-face {
     font-family: 'brandon';
     src: 
-        url('../../../fonts/BrandonGrotesque/Brandon-Regular.woff2') format('woff2')
+        url('../../../fonts/BrandonGrotesque/Brandon-Regular.woff2') format('woff2'),
         url('../../../fonts/BrandonGrotesque/Brandon-Regular.woff') format('woff'),
-        url('../../../fonts/BrandonGrotesque/Brandon_reg.woff') format('woff'),
         url('../../../fonts/BrandonGrotesque/Brandon_reg.otf') format('opentype'),
         url('../../../fonts/BrandonGrotesque/Brandon-Regular.ttf') format('truetype');
     font-weight:normal;
@@ -29,7 +28,7 @@ html, body {
 }
 
 body {
-    font-family: brandon, Helvetica, Arial, sans-serif;
+    font-family: brandon;
     margin: 0;
     line-height: 28px;
     text-rendering: optimizelegibility;
@@ -100,6 +99,13 @@ a:hover {
 a { color: black; text-decoration: none;}
 
 label { font-weight: normal; margin-bottom: 0; color: black; text-transform: capitalize;}
+
+#instagram-feed :nth-last-child(2) {
+    width: 100%;
+}
+.instagram-count {
+    display: none;
+}
 
 
 .container {
@@ -426,7 +432,7 @@ input[type="radio"] + label span {
 
 input[type="checkbox"]:checked + label span::before,
 input[type="radio"]:checked + label span::before {
-    content: " ";
+    /* content: " "; */
     color: #534D4C;
     text-align: center;
     padding-left: 16px;

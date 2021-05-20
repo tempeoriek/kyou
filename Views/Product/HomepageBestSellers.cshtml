@@ -3,23 +3,83 @@
 @using Nop.Web.Models.Catalog;
 @if (Model.Count > 0)
 {
-    <div class="product-grid bestsellers">
-        <div class="title">
-            <strong>@T("Bestsellers")</strong>
-        </div>
-        <div class="item-grid">
-            @foreach (var item in Model)
-            {
-                <div class="item-box">
-                    @Html.Partial("_ProductBox", item)
-                </div>
-            }
-        </div>
+  <div class="row" style="margin-top: 5%; margin-bottom: 5%;">
+    <div class="col-12 col-md-12 d-flex justify-content-center">
+      <h1 class="d-none d-md-block" style="color: gray; font-weight: bold; font-size: 20px;">NEW ARRIVALS</h1>
+      <h1 class="d-block d-md-none" style="color: gray; font-weight: bold; font-size: 14px;">NEW ARRIVALS</h1>
     </div>
+  </div>
+
+  @* Best Seller Desktop *@
+  <div class="d-none d-md-block hidden-xs hidden-sm position-relative">
+    <div class="row mb-5">
+      <div class="carouseldesktop hidden-sm p-0">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+          var temp = Model[i];
+          <div class="col-12 col-md-12 col-sm-12" style="border-left: 1px solid lightgray;">
+            <div class="row" style="padding: 0 4rem;">
+              <img src="@temp.DefaultPictureModel.ImageUrl" class="img-fluid center-block" />
+            </div>
+
+            <div class="row" style="padding: 0 4rem;font-size: 16px; line-height: 19px; margin-top: 5px;">
+              <p style="color: gray; font-weight: 600;">@temp.Name</p>
+            </div>
+            <div class="row" style="padding: 0 4rem;margin-top: -10px; font-size: 14px;">
+              <p style="color: gray;">@temp.ProductPrice.Price</p>
+            </div>
+          </div>
+
+        }
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div style="position: absolute; top: 40%; left: 34%;">
+        <a class="prevslider" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </div>
+      <div style="position: absolute; top: 40%; right: 34%;">
+        <a class="nextslider" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  @* Best Seller Mobile *@
+  <div class="row d-block d-md-none hidden-md hidden-xl">
+    <div class="row mb-5" id="carouselExampleControlsBestItems">
+      <div class="carouselmobile hidden-sm m-0">
+        @for (int z = 0; z < Model.Count(); z++)
+        {
+          var temp = Model[z];
+          <div class="col-12 col-md-12 col-sm-12">
+            <div class="row px-4" style="display: flex; justify-content: center; align-items: center;">
+              <img src="@temp.DefaultPictureModel.ImageUrl" class="img-fluid center-block" />
+            </div>
+            
+            <div class="row px-4" style="font-size: 16px; line-height: 19px; margin-top: 10px;">
+              <p style="font-size: 12px; color: gray; font-weight: 600;">@temp.Name</p>
+            </div>
+            <div class="row px-4" style="margin-top: -10px; font-size: 14px;">
+              <p style="font-size: 12px; color: gray;">@temp.ProductPrice.Price</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+  
 }
 
 <script>
-	console.log(`TEST NIH WOI`);
-	var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
-	console.log(model);    
+  //console.log(`TEST NIH WOI`);
+  var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+  //console.log(model);    
 </script>

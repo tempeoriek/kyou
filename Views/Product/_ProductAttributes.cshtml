@@ -50,7 +50,7 @@
         <div class="p-0 col-3 col-sm-3 col-md-3 d-flex justify-content-start align-items-center">
           <p class="m-0" style="font-size: 14px; color: gray;">@att_name</p>
         </div>
-        <div class="col-9 col-sm-9 col-md-9 d-flex justify-content-end" id="@string.Format("product_attribute_input_{0}", attribute.Id)">
+        <div class="col-9 col-sm-9 col-md-9 d-flex justify-content-end p-0" id="@string.Format("product_attribute_input_{0}", attribute.Id)">
             @switch (attribute.AttributeControlType)
             {
               case AttributeControlType.DropdownList:
@@ -206,29 +206,45 @@
               break;
               case AttributeControlType.ColorSquares:
               {
-                  <ul class="option-list color-squares" id="color-squares-@(attribute.Id)">
+                <div class="select-size d-flex flex-column">
+                  <div class="form-select-size">
+                    <ul class="list-unstyled list-inline color-squares" style="height: 100%; display: inline-flex;" id="color-squares-@(attribute.Id)">
                       @foreach (var pvaValue in attribute.Values)
                       {
-                          <li @(pvaValue.IsPreSelected ? @Html.Raw(" class=\"selected-value\"") : null)>
-                              <label for="@(controlId)_@(pvaValue.Id)">
-                                  <span class="color-container" title="@pvaValue.Name @(!String.IsNullOrEmpty(pvaValue.PriceAdjustment) ? " [" + pvaValue.PriceAdjustment + "]" : null)">
-                                      <span class="color" style="background-color:@(pvaValue.ColorSquaresRgb);">&nbsp;</span>
-                                  </span>
-                                  <input id="@(controlId)_@(pvaValue.Id)" type="radio" name="@(controlId)" value="@pvaValue.Id" checked="@pvaValue.IsPreSelected" />
-                                  @*uncomment below to display attribute value name*@
-                                  @*<span class="name">@pvaValue.Name @(!String.IsNullOrEmpty(pvaValue.PriceAdjustment) ? " [" + pvaValue.PriceAdjustment + "]" : null)</span>*@
-                              </label>
-                          </li>
+                        <li @(pvaValue.IsPreSelected ? @Html.Raw(" class=\"selected-value\"") : null)>
+                          <input id="@(controlId)_@(pvaValue.Id)" type="radio" name="@(controlId)" value="@pvaValue.Id" checked="@pvaValue.IsPreSelected" />
+                          <label for="@(controlId)_@(pvaValue.Id)" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                            <span class="color-container" style="border: 0;" title="@pvaValue.Name @(!String.IsNullOrEmpty(pvaValue.PriceAdjustment) ? " [" + pvaValue.PriceAdjustment + "]" : null)">
+                              <span class="color" style="border: 1px solid #D9BE9B; border-radius: 22px; background-color:@(pvaValue.ColorSquaresRgb);">&nbsp;</span>
+                            </span>
+                          </label>
+                        </li>
                       }
-                  </ul>
-                  <script type="text/javascript">
-                                      $(document).ready(function() {
-                                          $('.attributes #color-squares-@(attribute.Id)').delegate('input', 'click', function(event) {
-                                              $('.attributes #color-squares-@(attribute.Id)').find('li').removeClass('selected-value');
-                                              $(this).closest('li').addClass('selected-value');
-                                          });
-                                      });
-                  </script>
+                    </ul>
+                  </div>
+                </div>
+
+                /*<ul class="option-list color-squares" id="color-squares-@(attribute.Id)">
+                  @foreach (var pvaValue in attribute.Values)
+                  {
+                    <li @(pvaValue.IsPreSelected ? @Html.Raw(" class=\"selected-value\"") : null)>
+                      <label for="@(controlId)_@(pvaValue.Id)">
+                        <span class="color-container" title="@pvaValue.Name @(!String.IsNullOrEmpty(pvaValue.PriceAdjustment) ? " [" + pvaValue.PriceAdjustment + "]" : null)">
+                          <span class="color" style="background-color:@(pvaValue.ColorSquaresRgb);">&nbsp;</span>
+                        </span>
+                        <input id="@(controlId)_@(pvaValue.Id)" type="radio" name="@(controlId)" value="@pvaValue.Id" checked="@pvaValue.IsPreSelected" />
+                      </label>
+                    </li>
+                  }
+                </ul>*/
+                <script type="text/javascript">
+                  $(document).ready(function() {
+                      $('.attributes #color-squares-@(attribute.Id)').delegate('input', 'click', function(event) {
+                          $('.attributes #color-squares-@(attribute.Id)').find('li').removeClass('selected-value');
+                          $(this).closest('li').addClass('selected-value');
+                      });
+                  });
+                </script>
               }
               break;
             }
