@@ -432,7 +432,7 @@ input[type="radio"] + label span {
 
 input[type="checkbox"]:checked + label span::before,
 input[type="radio"]:checked + label span::before {
-    /* content: " "; */
+    content: " ";
     color: #534D4C;
     text-align: center;
     padding-left: 16px;
@@ -594,11 +594,12 @@ a[class*="child-acc-category-"] {
 .header-categories .child-categories:after {
     /* symbol for "opening" panels */
     content: "\00a0-";    /* adjust as needed, taken from bootstrap.css */
-    color: white;         /* adjust as needed */
+    color: #D9BE9B;         /* adjust as needed */
 }
 .header-categories .child-categories.collapsed:after {
     /* symbol for "collapsed" panels */
     content: "\00a0+";    /* adjust as needed, taken from bootstrap.css */
+    color: #D9BE9B;         /* adjust as needed */
 }
 .child-categories {
     content: "\00a0-";
