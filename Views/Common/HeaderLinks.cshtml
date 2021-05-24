@@ -51,21 +51,22 @@
 		saleall = "category-menu";
 	}
   string absolutepath = HttpContext.Current.Request.Url.AbsolutePath;
+  string host =HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
 	var src_img = "";
 	var menu_icon = "";
 	var bag_icon = "";
 	var cart_number = "";
 	var bckground_color = "";
 	if (absolutepath.Equals("/")) {
-		src_img = "./Themes/v1/Content/images/search.png";
-		menu_icon = "./Themes/v1/Content/images/menu-white.png";
-		bag_icon = "./Themes/v1/Content/images/bag-white.png";
+		src_img = host + "/Themes/v1/Content/images/search.svg";
+		menu_icon = host + "/Themes/v1/Content/images/menu-white.png";
+		bag_icon = host + "/Themes/v1/Content/images/bag-white.png";
 		cart_number = "color: white !important";
 		bckground_color = "background-color: transparent; height: 70px;";
 	} else {
-		src_img = "./Themes/v1/Content/images/search.png";
-		menu_icon = "./Themes/v1/Content/images/menu-black.png";
-		bag_icon = "./Themes/v1/Content/images/bag-black.png";
+		src_img = host + "/Themes/v1/Content/images/search2.svg";
+		menu_icon = host + "/Themes/v1/Content/images/menu-black.png";
+		bag_icon = host + "/Themes/v1/Content/images/bag-black.png";
 		cart_number = "color: gray !important";
 		bckground_color = "background-color: white; height: 70px;";
 	}
@@ -93,7 +94,7 @@
 				<div class="col-md-1"></div>
 				<div class="col-4 col-md-2 d-flex justify-content-end align-items-center">
 					<div  class="show-mobile-menu-btn" style="cursor:pointer;">
-						<img src="@src_img" />
+						<img id="searchHeader" src="@src_img" />
 					</div>
 				</div>
 
@@ -110,7 +111,7 @@
 						}
 						<a href="#bag" onclick="$('.aside').asidebar('open')" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: #D9BE9B;</text>} else {<text>color: gray;</text>}">
 							<div id="icbag-panel" class="@cssCartItem align-items-center">
-								<span>CART (<span id="mCartItemsQty" class="cart-qty" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: #D9BE9B;</text>} else {<text>color: gray;</text>}" style="@cart_number">@cartItem</span>)</span>
+								<span id="cartColorHeader">CART (<span id="mCartItemsQty" class="cart-qty" style="font-size: 16px;" style="@cart_number">@cartItem</span>)</span>
 							</div>
 						</a>
 
@@ -129,7 +130,7 @@
 						<ul class="list-unstyled list-inline" style="margin: 0;">
 							<li>
 								<div class="dropdown">
-									<a href="#" class="nav-item" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: #D9BE9B;</text>} else {<text>color: gray;</text>}">MY ACCOUNT</a>
+									<a id="myAccountColorHeader" href="#" class="nav-item" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: #D9BE9B;</text>} else {<text>color: gray;</text>}">MY ACCOUNT</a>
 									<div class="dropdown-content2 text-left">
 										<a href="~/order/ConfirmPayments">Confirm Payment</a>
 										<a href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a>
@@ -144,8 +145,8 @@
 					}
 					else
 					{
-						<div> 
-							<a href="~/login" class="signin btn-login" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: #D9BE9B;</text>} else {<text>color: gray;</text>}">LOGIN / REGISTER</a>
+						<div>
+							<a id="loginColorHeader" href="~/login" class="nav-item" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: #D9BE9B;</text>} else {<text>color: gray;</text>}">LOGIN / REGISTER</a>
 						</div>
 					}
 				</div>

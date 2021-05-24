@@ -338,7 +338,7 @@ input[type="submit"] {
     display: inline-block;
     color: black;
     float: left;
-    background: url("../../../Content/Images/search.png");
+    background: url("../../../Content/Images/search.svg");
     text-indent: -10000px;
     border: none;
     position: relative;
@@ -365,7 +365,7 @@ input[type="submit"] {
     height: 42px;   
     display: inline-block;
     color: #000;
-    background: url(../Content/images/search.png) no-repeat;
+    background: url(../Content/images/search.svg) no-repeat;
     background-size: contain;
     border: none;
     position: absolute;
@@ -1779,7 +1779,7 @@ cursor:pointer;
 
     #search_submit {
         color: #fff;
-        background: url(../Content/images/search.png) no-repeat;
+        background: url(../Content/images/search.svg) no-repeat;
         left: 0px;
     }
 

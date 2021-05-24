@@ -1,8 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="19.684" height="19.475" viewBox="0 0 19.684 19.475">
-  <g id="noun_Zoom_In_3219096" data-name="noun_Zoom In_3219096" transform="translate(0.25 0.25)">
-    <g id="Layer_14" data-name="Layer 14">
-      <path id="Path_22" data-name="Path 22" d="M11.685,19.839A7.944,7.944,0,1,1,19.629,11.9a7.944,7.944,0,0,1-7.944,7.944Zm0-14.941a7,7,0,1,0,7,7,7,7,0,0,0-7-7Z" transform="translate(-3.742 -3.952)" stroke="#000" stroke-width="0.5"/>
-      <path id="Path_26" data-name="Path 26" d="M36.849,36.9a.473.473,0,0,1-.341-.145l-5.286-5.477a.473.473,0,1,1,.681-.657L37.189,36.1a.473.473,0,0,1-.341.8Z" transform="translate(-18.148 -17.922)" stroke="#000" stroke-width="0.5"/>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="14.374" height="14.374" viewBox="0 0 14.374 14.374">
+  <g id="search" transform="translate(-163.903 -9.5)">
+    <path id="Path_2" data-name="Path 2" d="M12.093,17.686a5.492,5.492,0,0,0,3.572-1.3l4.341,4.341a.509.509,0,0,0,.719,0,.509.509,0,0,0,0-.719l-4.341-4.341a5.584,5.584,0,1,0-4.291,2.021Zm0-10.169a4.576,4.576,0,1,1-4.576,4.576A4.581,4.581,0,0,1,12.093,7.517Z" transform="translate(157.403 3)" fill="#d9be9b"/>
   </g>
 </svg>
