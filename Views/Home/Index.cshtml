@@ -245,13 +245,15 @@
 <div class="row">
   <div class="col-12">
     <div class="carouseldesktopig d-none d-md-block hidden-xs hidden-sm p-0">
-      @for (int i = 0; i < 5; i++) {
-        <div><img src="~/Themes/v1/Content/images/ig-home.png" class="img-fluid"></div>
+      @for (int i = 1; i < 5; i++) {
+        var picName = "ig"+i+".jpg";
+        <div><img src="~/Themes/v1/Content/images/@picName" class="img-fluid"></div>
       }
     </div>
     <div class="carouselmobileig d-block d-md-none hidden-md hidden-xl p-0">
-      @for (int i = 0; i < 4; i++) {
-        <div><img src="~/Themes/v1/Content/images/ig-home.png" class="img-fluid px-5"></div>
+      @for (int i = 1; i < 5; i++) {
+        var picName = "ig"+i+".jpg";
+        <div><img src="~/Themes/v1/Content/images/@picName" class="img-fluid px-5"></div>
       }
     </div>
   </div>
