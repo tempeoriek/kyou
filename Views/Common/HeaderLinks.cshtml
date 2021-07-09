@@ -51,7 +51,7 @@
 		saleall = "category-menu";
 	}
   string absolutepath = HttpContext.Current.Request.Url.AbsolutePath;
-  string host =HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+  string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
 	var src_img = "";
 	var menu_icon = "";
 	var bag_icon = "";
@@ -83,7 +83,16 @@
 </div>
 
 <div class="fixed-top d-none d-md-block hidden-xs hidden-sm" style="@bckground_color">
-	
+	@if (absolutepath == "/") {
+		<div class="row promo-top" style="display: flex;">
+			<div class="col-12 col-md-12 col-sm-12" style="background-color: #D9BE9B !important;">
+				<p class="p-0 m-0 text-center px-5" style="color: black;">
+					Free shipping orders IDR500,000 (Indonesia area only)
+					<span class="close-promo-top" style="float: right; cursor: pointer">X</span>
+				</p>
+			</div>
+		</div>
+	}
 	@* new nav bar full width dropdown *@
 	@Html.Action("CategoryNavigation", "Catalog", new {saleall = saleall, about = about, newproduct = newproduct, contact = contact, currentCategoryId = currentCategoryId, currentProductId = currentProductId, isSidebar = false })
 
@@ -132,7 +141,7 @@
 								<div class="dropdown">
 									<a id="myAccountColorHeader" href="#" class="nav-item" style="font-size: 16px; @if (absolutepath.Equals("/")) {<text>color: #D9BE9B;</text>} else {<text>color: gray;</text>}">MY ACCOUNT</a>
 									<div class="dropdown-content2 text-left">
-										<a href="~/order/ConfirmPayments">Confirm Payment</a>
+										@* <a href="~/order/ConfirmPayments">Confirm Payment</a> *@
 										<a href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a>
 										<a href="@Url.RouteUrl("CustomerInfo")">Personal Info</a>
 										<a href="@Url.RouteUrl("CustomerChangePassword")">Change Password</a>
@@ -190,6 +199,17 @@
 
 @*mobile navbar*@
 <div class="d-block d-md-none hidden-md hidden-lg sidebarNavigation fixed-top">
+	@if (absolutepath == "/") {
+		<div class="row promo-top" style="display: flex;">
+			<div class="col-12 col-md-12 col-sm-12" style="background-color: #D9BE9B !important;">
+				<p class="p-0 m-0 text-center px-5" style="color: black;">
+					Free shipping orders IDR500,000 (Indonesia area only)
+					<span class="close-promo-top" style="float: right; cursor: pointer">X</span>
+				</p>
+			</div>
+		</div>
+	}
+
 	<nav class="navbar navbar-expand-md" data-sidebarClass="navbar-dark" style="background-color: transparent; ">
 		<div class="text-center" style="width:100%;">
 			<div class="row m-1">
@@ -253,13 +273,14 @@
 								</li>
 							</ul>
 							<a href="/about" class="signin btn-login" style="padding: 0; font-size:14px; color: #D9BE9B !important">ABOUT US</a>
+							<a href="~/order/ConfirmPayments/" class="signin btn-login" style="padding: 0; font-size:14px; color: #D9BE9B !important">PAYMENT CONFIMRATION</a>
 							<ul class="list-unstyled list-inline" style="width: 100%;">
 								@if (Model.IsAuthenticated)
 								{
 									<li class="dropdown dropright-list">
 										<a href="@Url.RouteUrl("CustomerInfo")" class="dropbtn mb-2" style="font-size:14px; color: #D9BE9B; padding: 0;" data-toggle="collapse" data-target="#collapse-nav2" aria-expanded="false" aria-controls="collapse-nav2">MY ACCOUNT</a>
 										<div class="collapse" id="collapse-nav2" style="padding-left: 8%; width: 300px;">
-											<a class="mb-2" style="color: white; font-size: 14px; padding: 0;" href="~/order/ConfirmPayments">Confirm Payment</a>
+											@* <a class="mb-2" style="color: white; font-size: 14px; padding: 0;" href="~/order/ConfirmPayments">Confirm Payment</a> *@
 											<a class="mb-2" style="color: white; font-size: 14px; padding: 0;" href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a>
 											<a class="mb-2" style="color: white; font-size: 14px; padding: 0;" href="@Url.RouteUrl("CustomerInfo")">Personal Info</a>
 											<a class="mb-2" style="color: white; font-size: 14px; padding: 0;" href="@Url.RouteUrl("CustomerChangePassword")">Change Password</a>
@@ -309,6 +330,10 @@
 
 	$(document).on('click', function () {
 		$('.dropdown').removeClass('active');
+	});
+
+	$(".close-promo-top").click(function () {
+    $('.promo-top').attr('style', 'display: none !important');
 	});
 
 	$(document).on('click', '.dropdown-content', function (e) {

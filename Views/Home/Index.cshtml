@@ -5,7 +5,7 @@
 }
 
 @* subcribe *@
-@Html.Partial("SubcribeHomepage")
+@Html.Partial("_Subcribe")
 
 <div class="">@Html.Action("HeaderLinks", "Common")</div>
 
@@ -157,7 +157,7 @@
 
 
 @* Best Seller ? *@
-@Html.Action("HomepageBestSellers", "Product")
+@Html.Action("HomepageBestSellers", "Product", new {categoryId = 2})
 
 @* Best Seller Desktop *@
 <div class="d-none d-md-block hidden-xs hidden-sm position-relative">
@@ -247,13 +247,21 @@
     <div class="carouseldesktopig d-none d-md-block hidden-xs hidden-sm p-0">
       @for (int i = 1; i < 5; i++) {
         var picName = "ig"+i+".jpg";
-        <div><img src="~/Themes/v1/Content/images/@picName" class="img-fluid"></div>
+        <div>
+          <a target=”_blank” href="https://www.instagram.com/kyoulabel/?hl=en" style="text-decoration: none;">
+            <img src="~/Themes/v1/Content/images/@picName" class="img-fluid">
+          </a>
+        </div>
       }
     </div>
     <div class="carouselmobileig d-block d-md-none hidden-md hidden-xl p-0">
       @for (int i = 1; i < 5; i++) {
         var picName = "ig"+i+".jpg";
-        <div><img src="~/Themes/v1/Content/images/@picName" class="img-fluid px-5"></div>
+        <div>
+          <a target=”_blank” href="https://www.instagram.com/kyoulabel/?hl=en" style="text-decoration: none;">
+            <img src="~/Themes/v1/Content/images/@picName" class="img-fluid px-5">
+          </a>
+        </div>
       }
     </div>
   </div>

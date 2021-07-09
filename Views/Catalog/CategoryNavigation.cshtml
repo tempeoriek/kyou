@@ -191,19 +191,23 @@
               {
                 if (index == 0) {
                   <a id="headingCategory-@category.Id" class="category-item" style="@if (absolutepath.Equals("/")) {<text>color: #D9BE9B !important;</text>} else {<text>color: gray;</text>}" role="button" @* href="/@category.SeName" *@>
-                    @category.Name.ToUpper()
+                    SHOP
+                    @* @category.Name.ToUpper() *@
                   </a>
                   <a class="category-item headabout" href="/about" style="@if (absolutepath.Equals("/")) {<text>color: #D9BE9B !important;</text>} else {<text>color: gray;</text>}">
                     ABOUT US
                   </a>
+                  <a class="category-item headabout" href="~/order/ConfirmPayments/" style="@if (absolutepath.Equals("/")) {<text>color: #D9BE9B !important;</text>} else {<text>color: gray;</text>}">
+                    PAYMENT CONFIRMATION
+                  </a>
                 }
               }
-              else
+              @* else
               {
                 <a id="headingCategory-@category.Id" class="category-item" href="@Url.RouteUrl("Category", new { SeName = category.SeName })">
                   @category.Name.ToUpper()
                 </a>
-              }
+              } *@
 
               index++;
             }
@@ -227,9 +231,9 @@
             <div style="width: 100%;">
               <div class="list-group">
                 <ul class="list-unstyled">
-                  <li>
+                  @* <li>
                     <a style="color: #D9BE9B; font-size: 16px;" href="/new-arrival">NEW ARRIVAL</a>
-                  </li>
+                  </li> *@
 
                   @foreach (var categories in Model.Categories)
                   {
