@@ -148,19 +148,19 @@
   }
 }
 
-<div class="row" style="margin-top: 5%; margin-bottom: 5%;">
+@* <div class="row" style="margin-top: 5%; margin-bottom: 5%;">
   <div class="col-12 col-md-12 d-flex justify-content-center">
     <h1 class="d-none d-md-block" style="color: gray; font-weight: bold; font-size: 20px;">NEW ARRIVALS</h1>
     <h1 class="d-block d-md-none" style="color: gray; font-weight: bold; font-size: 14px;">NEW ARRIVALS</h1>
   </div>
-</div>
+</div> *@
 
 
 @* Best Seller ? *@
-@Html.Action("HomepageBestSellers", "Product", new {categoryId = 2})
+@Html.Action("HomepageBestSellers", "Product")
 
 @* Best Seller Desktop *@
-<div class="d-none d-md-block hidden-xs hidden-sm position-relative">
+@* <div class="d-none d-md-block hidden-xs hidden-sm position-relative">
   <div class="row mb-5">
     <div class="carouseldesktop hidden-sm p-0">
       @for (int i = 0; i < 4; i++)
@@ -198,11 +198,11 @@
       </a>
     </div>
   </div>
-</div>
+</div> *@
 
 
 @* Best Seller Mobile *@
-<div class="row d-block d-md-none hidden-md hidden-xl">
+@* <div class="row d-block d-md-none hidden-md hidden-xl">
   <div class="row mb-5" id="carouselExampleControlsBestItems">
     <div class="carouselmobile hidden-sm m-0">
       @for (int i = 0; i < 4; i++)
@@ -222,7 +222,7 @@
       }
     </div>
   </div>
-</div>
+</div> *@
 
 
 
