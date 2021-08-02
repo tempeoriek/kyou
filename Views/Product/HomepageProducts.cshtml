@@ -4,77 +4,85 @@
 
 @if (Model.Count > 0)
 {
-   <div class="col-md-12 mt-large">
-          @{
-            var counter = 0;
-            var cssClass = "";
-          }
+  <div class="row" style="margin-top: 5%; margin-bottom: 5%;">
+    <div class="col-12 col-md-12 d-flex justify-content-center">
+      <h1 class="d-none d-md-block" style="color: gray; font-weight: bold; font-size: 20px;">NEW ARRIVALS</h1>
+      <h1 class="d-block d-md-none" style="color: gray; font-weight: bold; font-size: 14px;">NEW ARRIVALS</h1>
+    </div>
+  </div>
 
-        @foreach (var item in Model)
+  @* Best Seller Desktop *@
+  <div class="d-none d-md-block hidden-xs hidden-sm position-relative">
+    <div class="row mb-5">
+      <div class="carouseldesktop hidden-sm p-0">
+        @for (int i = 0; i < Model.Count(); i++)
         {
-            if (counter == 0)
-            {
-                cssClass = "active";
-            }
-            else if (counter > 0 && counter <= 3)
-            {
-                cssClass = "active-next";
-            }
-            else
-            {
-                cssClass = "";
-            }
-
-            <div class="col-md-4 item @cssClass">
-                @Html.Partial("_ProductBox", item)
+          var temp = Model[i];
+          <div class="col-12 col-md-12 col-sm-12" style="border-left: 1px solid lightgray;">
+            <div class="row" style="padding: 0 4rem;">
+              <a href="@Url.RouteUrl("Product", new { SeName = temp.SeName})" class="clean">
+                <img src="@temp.DefaultPictureModel.ImageUrl" class="img-fluid center-block" />
+              </a>
             </div>
 
+            <div class="row" style="padding: 0 4rem;font-size: 16px; line-height: 19px; margin-top: 5px;">
+              <a class="clean" style="text-decoration: none; color: gray; font-weight: 600;" href="@Url.RouteUrl("Product", new { SeName = temp.SeName})">
+                @temp.Name
+              </a>
+            </div>
+            <div class="row" style="padding: 0 4rem;margin-top: -10px; font-size: 14px;">
+              <p style="color: gray;">@temp.ProductPrice.Price</p>
+            </div>
+          </div>
+
         }
+      </div>
 
     </div>
 
-    //ini codingan yang lama
-    @*<div class="container-fluid homepage-carousel">
-        <h1 class="big pt-35 pb-35">@T("HomePage.Products")</h1>
-        <div class="container carousel" data-ride="carousel" id="mySlider" data-interval="false">
-            <div class="row carousel-inner center-block">
-                @{
-                    var counter = 0;
-                    var cssClass = "";
-                }
+    <div class="row">
+      <div style="position: absolute; top: 40%; left: 34%;">
+        <a class="prevslider" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </div>
+      <div style="position: absolute; top: 40%; right: 34%;">
+        <a class="nextslider" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
-                @foreach (var item in Model)
-                {
-                    if (counter == 0)
-                    {
-                        cssClass = "active";
-                    }
-                    else if (counter > 0 && counter <= 3)
-                    {
-                        cssClass = "active-next";
-                    }
-                    else
-                    {
-                        cssClass = "";
-                    }
 
-                    <div class="col-md-4 item @cssClass">
-                        @Html.Partial("_ProductBox", item)
-                    </div>
-
-                }
+  @* Best Seller Mobile *@
+  <div class="row d-block d-md-none hidden-md hidden-xl">
+    <div class="row mb-5" id="carouselExampleControlsBestItems">
+      <div class="carouselmobile hidden-sm m-0">
+        @for (int z = 0; z < Model.Count(); z++)
+        {
+          var temp = Model[z];
+          <div class="col-12 col-md-12 col-sm-12">
+            <div class="row px-4" style="display: flex; justify-content: center; align-items: center;">
+              <a href="@Url.RouteUrl("Product", new { SeName = temp.SeName})" class="clean">
+                <img src="@temp.DefaultPictureModel.ImageUrl" class="img-fluid center-block" />
+              </a>
             </div>
-            <a class="left carousel-control" href="#mySlider" role="button" data-slide="prev">
-                <img src="~/Themes/v1/content/images/ic_chevron_left-1.png" alt="">
-                <span class="sr-only">Previous</span>
-            </a>
-
-            <a class="right carousel-control" href="#mySlider" role="button" data-slide="next">
-                <img src="~/Themes/v1/content/images/ic_chevron_left.png" alt="">
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>*@
-
+            
+            <div class="row px-4" style="font-size: 16px; line-height: 19px; margin-top: 10px;">
+              <a href="@Url.RouteUrl("Product", new { SeName = temp.SeName})" class="clean" style="text-decoration: none; font-size: 12px; color: gray; font-weight: 600;">
+                @temp.Name
+              </a>
+            </div>
+            <div class="row px-4" style="margin-top: -10px; font-size: 14px;">
+              <p style="font-size: 12px; color: gray;">@temp.ProductPrice.Price</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+  
 }
-
