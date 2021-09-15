@@ -57,18 +57,21 @@
 	var bag_icon = "";
 	var cart_number = "";
 	var bckground_color = "";
+	var bckground_color_mobile = "";
 	if (absolutepath.Equals("/")) {
 		src_img = host + "/Themes/v1/Content/images/search.svg";
 		menu_icon = host + "/Themes/v1/Content/images/menu-white.png";
 		bag_icon = host + "/Themes/v1/Content/images/bag-white.png";
 		cart_number = "color: white !important";
 		bckground_color = "background-color: transparent; height: 70px;";
+		bckground_color_mobile = "background-color: transparent; height: 50px;";
 	} else {
 		src_img = host + "/Themes/v1/Content/images/search2.svg";
 		menu_icon = host + "/Themes/v1/Content/images/menu-black.png";
 		bag_icon = host + "/Themes/v1/Content/images/bag-black.png";
 		cart_number = "color: gray !important";
 		bckground_color = "background-color: white; height: 70px;";
+		bckground_color_mobile = "background-color: white; height: 50px;";
 	}
 }
 
@@ -82,7 +85,7 @@
     </div>
 </div>
 
-<div class="fixed-top d-none d-md-block hidden-xs hidden-sm" style="@bckground_color">
+<div class="fixed-top d-none d-md-block hidden-xs hidden-sm header-desktop" style="@bckground_color">
 	@if (absolutepath == "/") {
 		<div class="row promo-top" style="display: flex;">
 			<div class="col-12 col-md-12 col-sm-12" style="background-color: #D9BE9B !important;">
@@ -178,16 +181,15 @@
 </div>
 
 @*overlay shopping cart*@
+
 <div class="aside">
-    @* <div class="aside-header"><span class="close" data-dismiss="aside" aria-hidden="true">&times;</span></div> *@
     <div class="aside-contents">
         <div id="bag">@Html.Action("FlyoutShoppingCart", "ShoppingCart")</div>
     </div>
 </div>
 <div class="aside-backdrop"></div>
 
-@* cart mobile  *@
-<div class="asidemobile">
+@* <div class="asidemobile">
 	<div style="height: 100%; display: flex; justify-content: space-between">
 		<div id="bag" style="height: 100%; width: 100%;">
 			@Html.Action("FlyoutShoppingCart", "ShoppingCart")
@@ -195,10 +197,10 @@
 	</div>
 </div>
 <div class="asidemobile-backdrop"></div>
-
+ *@
 
 @*mobile navbar*@
-<div class="d-block d-md-none hidden-md hidden-lg sidebarNavigation fixed-top">
+<div class="d-block d-md-none hidden-md hidden-lg sidebarNavigation fixed-top header-desktop" style="@bckground_color_mobile">
 	@if (absolutepath == "/") {
 		<div class="row promo-top" style="display: flex;">
 			<div class="col-12 col-md-12 col-sm-12" style="background-color: #D9BE9B !important;">
@@ -236,13 +238,12 @@
 							cartItem = string.Format("{0}", Model.ShoppingCartItems);
 							cssCartItem = "bag";
 						}
-						<a href="#bag" onclick="$('.asidemobile').asidebar('open')">
-							<div id="icbag-panel" class="@cssCartItem align-items-center d-flex">
-								<span class="nav-item" style="color:#707070;margin-left:-8px;">
-									<img src="@bag_icon" style="width: 50%;" /> <span id="mCartItemsQty" class="cart-qty" style="@cart_number">@cartItem</span>
+						<a href="#bag" onclick="$('.aside').asidebar('open')">
+							<div id="icbag-panel" class="@cssCartItem align-items-center">
+								<img src="@bag_icon" style="width: 50%;" /> 
+								<span id="mCartItemsQty" class="cart-qty" style="font-size: 16px;" style="@cart_number">
+									@cartItem
 								</span>
-								@* <span id="mCartItemsQty" class="xans-element-xans-layout xans-layout-orderbasketcount cart-qty">
-								</span> *@
 							</div>
 						</a>
 					}
@@ -321,7 +322,28 @@
 
 <script>
 	window.onload = function () { if (window.jQuery) { $(document).ready(function () { $(".sidebarNavigation .navbar-collapse").hide().clone().appendTo("body").removeAttr("class").addClass("sideMenu").show(); $("body").append("<div class='overlay'></div>"); $(".navbar-toggle, .navbar-togglers").on("click", function () { $(".sideMenu").addClass($(".sidebarNavigation").attr("data-sidebarClass")); $(".sideMenu, .overlay, .xclose").toggleClass("open"); $(".overlay, .xclose").on("click", function () { $(this).removeClass("open"); $(".sideMenu").removeClass("open") }) }); $("body").on("click", ".sideMenu.open .nav-item", function () { if (!$(this).hasClass("dropdown")) { $(".sideMenu, .overlay, .xclose").toggleClass("open") } }); $(window).resize(function () { if ($(".navbar-toggler").is(":block")) { $(".sideMenu, .overlay").hide() } else { $(".sideMenu, .overlay, .xclose").show() } }) }) } else { console.log("sidebarNavigation Requires jQuery") } }
+	if (window.location.pathname == '/') {
+		$(window).on("scroll", function() {
+				
+				let menu_icon = $(window).scrollTop() > 50 ? "/Themes/v1/Content/images/menu-black.png" : "/Themes/v1/Content/images/menu-white.png";
+				let src_img = $(window).scrollTop() > 50 ? "/Themes/v1/Content/images/search2.svg" : "/Themes/v1/Content/images/search.svg";
+				let bag_icon = $(window).scrollTop() > 50 ? "/Themes/v1/Content/images/bag-black.png" : "/Themes/v1/Content/images/bag-white.png";
+				let acc_icon = $(window).scrollTop() > 50 ? "/Themes/v1/Content/images/account-icon-black.svg" : "/Themes/v1/Content/images/account-icon.svg";
+				
+				$(".search-header").attr('src', window.location.origin + src_img);
+				$(".bag-header").attr('src', window.location.origin + bag_icon);
+				$(".acc-header").attr('src', window.location.origin + acc_icon);
 
+				if($(window).scrollTop() > 50) {
+					$(".header-desktop").attr('style', 'background-color: white !important');
+					$(".bag-text").attr('style', 'color: black !important');
+				} else {
+					$(".bag-text").attr('style', 'color: white !important');
+					$(".header-desktop").attr('style', 'background-color: transparent !important');
+				}
+		});
+	}
+	
 	$(document).on('click', '.dropdown', function (e) {
 		e.stopPropagation();
 		$('.dropdown').not($(this)).removeClass('active');
