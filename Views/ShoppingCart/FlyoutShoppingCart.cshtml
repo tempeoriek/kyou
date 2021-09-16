@@ -11,8 +11,14 @@
       <div class="count text-center">
         @if (Model.TotalProducts == 0)
         {
-          @T("ShoppingCart.Mini.NoItems")
+          <div class="row d-flex justify-content-between align-items-center m-0 mb-3" style="border-bottom: 1px solid lightgray; padding-bottom: 5px;">
+            <div class="text-left"><h3 style="color: gray">CART</h3></div>
 
+            <div style="text-align: right;">
+              <p class="m-0" style="color: gray; cursor: pointer;" data-dismiss="aside" aria-hidden="true">Close</p>
+            </div>
+          </div>
+          @T("ShoppingCart.Mini.NoItems")
         }
         else
         {
