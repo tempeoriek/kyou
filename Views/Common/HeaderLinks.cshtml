@@ -87,6 +87,10 @@
 
 <div class="fixed-top d-none d-md-block hidden-xs hidden-sm header-desktop" style="@bckground_color">
 	@if (absolutepath == "/") {
+		@Html.Action("TopicBlock", "Topic", new { systemName = "TopPromoText" })
+	}
+
+	@* @if (absolutepath == "/") {
 		<div class="row promo-top" style="display: flex;">
 			<div class="col-12 col-md-12 col-sm-12" style="background-color: #D9BE9B !important;">
 				<p class="p-0 m-0 text-center px-5" style="color: black;">
@@ -95,7 +99,7 @@
 				</p>
 			</div>
 		</div>
-	}
+	} *@
 	@* new nav bar full width dropdown *@
 	@Html.Action("CategoryNavigation", "Catalog", new {saleall = saleall, about = about, newproduct = newproduct, contact = contact, currentCategoryId = currentCategoryId, currentProductId = currentProductId, isSidebar = false })
 
@@ -202,6 +206,11 @@
 @*mobile navbar*@
 <div class="d-block d-md-none hidden-md hidden-lg sidebarNavigation fixed-top header-desktop" style="@bckground_color_mobile">
 	@if (absolutepath == "/") {
+		@Html.Action("TopicBlock", "Topic", new { systemName = "TopPromoText" })
+	}
+
+
+	@* @if (absolutepath == "/") {
 		<div class="row promo-top" style="display: flex;">
 			<div class="col-12 col-md-12 col-sm-12" style="background-color: #D9BE9B !important;">
 				<p class="p-0 m-0 text-center px-5" style="color: black;">
@@ -210,7 +219,7 @@
 				</p>
 			</div>
 		</div>
-	}
+	} *@
 
 	<nav class="navbar navbar-expand-md" data-sidebarClass="navbar-dark" style="background-color: transparent; ">
 		<div class="text-center" style="width:100%;">
