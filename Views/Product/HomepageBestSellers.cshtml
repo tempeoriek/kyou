@@ -1,6 +1,7 @@
 ﻿@model IList<ProductOverviewModel>
 
 @using Nop.Web.Models.Catalog;
+
 @if (Model.Count > 0)
 {
   <div class="row" style="margin-top: 5%; margin-bottom: 5%;">
@@ -87,7 +88,6 @@
 }
 
 <script>
-  //console.log(`TEST NIH WOI`);
   var model = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
   //console.log(model);    
 </script>
